@@ -98,6 +98,11 @@ and thus should be accurate.
 
 ## Examples
 
+|                                                                                                                                                     |                                             |                                               |                                           |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------| ------------------------------------------- | --------------------------------------------- | ----------------------------------------- |
+| ![](https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/examples/card-1b5363f3-edb6-4afe-b945-14a81f138a3e.svg) | ![](https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/examples/card-1e76bc80-21ea-4be0-8f5b-79792f67a58d.svg)         | ![](https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/examples/card-1f180796-434f-47b5-9646-0492ca8c8993.svg)         | ![](https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/examples/card-3bcbe7a4-2892-4f3d-91de-6be59ce50108.svg)           |
+
+
 
 ## Acknowledgements
 
