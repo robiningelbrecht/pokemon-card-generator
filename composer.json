@@ -23,7 +23,6 @@
     "guzzlehttp/guzzle": "^7.0",
     "lcobucci/clock": "^2.2",
     "openai-php/client": "^0.3.0",
-    "php-amqplib/php-amqplib": "^3.5",
     "php-di/php-di": "^6.4",
     "php-di/slim-bridge": "^3.2",
     "rakibtg/sleekdb": "^2.15",
