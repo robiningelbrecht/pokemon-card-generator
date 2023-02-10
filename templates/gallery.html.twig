@@ -2,11 +2,161 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Gallery</title>
+    <style>
+        :root {
+            --card-width: 474px;
+            --gap-width: 10px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: var(--gap-width);
+            flex-wrap: wrap;
+        }
+
+        .gallery img {
+            max-width: 100%;
+        }
+
+        @media (min-width: calc((474px * 2)) ) {
+            .gallery {
+                width: calc((474px * 2));
+            }
+
+            .gallery > a {
+                width: calc(50% - var(--gap-width));
+            }
+        }
+
+        @media (min-width: calc((474px * 3)) ) {
+            .gallery {
+                width: calc((474px * 3));
+            }
+
+            .gallery > a {
+                width: calc(33% - var(--gap-width));
+            }
+        }
+
+        @media (min-width: calc((474px * 4)) ) {
+            .gallery {
+                width: calc((474px * 4));
+            }
+
+            .gallery > a {
+                width: calc(25% - var(--gap-width));
+            }
+        }
+
+        .modal-window {
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.25);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+
+        .modal-window:target {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window > div {
+            width: 800px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2em;
+            background: white;
+            border-radius: 1rem;
+        }
+
+        .modal-window > div .inner {
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+        }
+
+        .modal-window > div .inner .visual {
+            width: 200px;
+        }
+
+        .modal-window > div .inner .metadata {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        .modal-window > div .inner .metadata h3 {
+            margin: 0;
+        }
+
+        .modal-window > div label {
+            font-weight: 600;
+        }
+
+        .modal-close {
+            font-weight: 600;
+            color: #aaa;
+            line-height: 50px;
+            font-size: 80%;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            top: 0;
+            width: 70px;
+            text-decoration: none;
+        }
+
+        .modal-close:hover {
+            color: black;
+        }
+    </style>
 </head>
 <body>
+<div class="gallery">
     {% for card in cards %}
-        <img src="{{ card }}" alt="card"/>
+        <a href="#open-modal-{{ card.cardId }}"><img src="{{ card.uri }}" alt="card"/></a>
+        <div id="open-modal-{{ card.cardId }}" class="modal-window">
+            <div>
+                <a href="#" title="Close" class="modal-close">Close</a>
+                <div class="inner">
+                    <div class="visual">
+                        <img src="{{ card.uri }}" alt="card"/>
+                    </div>
+                    <div class="metadata">
+                        <h3>Used Prompts</h3>
+                        <div>
+                            <label>Name: </label>{{ card.metadata.promptForName ?: 'Hmmmm, we lost track of this data...'  }}
+                        </div>
+                        <div>
+                            <label>Description: </label>{{ card.metadata.promptForDescription ?: 'Hmmmm, we lost track of this data...' }}
+                        </div>
+                        <div>
+                            <label>Visual: </label>{{ card.metadata.promptForVisual ?: 'Hmmmm, we lost track of this data...' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
+</div>
 </body>
 </html>

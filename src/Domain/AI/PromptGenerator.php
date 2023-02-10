@@ -60,11 +60,13 @@ class PromptGenerator
         // a chibi young fire-type pokemon::1.8, a parrot, in a volcano environment, lava texture background, anime chibi drawing style, pastel background --niji --ar 3:2
         $segments = [
             'mdjrny-v4 style portrait of '.$this->cardType->value.'-type pokemon',
+            $this->subject.'-like',
             'digital art',
             'sugimori',
             'chibi',
-            'centerd',
+            'centered',
             'full body',
+            $this->ambience,
         ];
 
         return Prompt::fromString(implode(', ', $segments));

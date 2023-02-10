@@ -36,7 +36,7 @@ return [
     ])),
     ReplicateApiKey::class => fn () => ReplicateApiKey::fromString($_ENV['REPLICATE_API_KEY']),
     Client::class => fn () => OpenAI::client($_ENV['OPEN_AI_API_KEY']),
-    Valuestore::class => fn () => Valuestore::make($_ENV['VALUE_STORE_PATH']),
+    Valuestore::class => fn () => Valuestore::make($appRoot.'/'.$_ENV['VALUE_STORE_PATH']),
     // Clock.
     Clock::class => DI\factory([SystemClock::class, 'fromSystemTimezone']),
     // Twig Environment.

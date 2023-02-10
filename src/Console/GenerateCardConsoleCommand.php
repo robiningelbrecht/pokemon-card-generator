@@ -3,13 +3,13 @@
 namespace App\Console;
 
 use App\Domain\Card\CardId;
+use App\Domain\Card\CardRepository;
 use App\Domain\Card\CardType;
 use App\Domain\Card\GenerateCard\GenerateCard;
 use App\Domain\Pokemon\PokemonRarity;
 use App\Domain\Pokemon\PokemonSize;
 use App\Infrastructure\CQRS\CommandBus;
 use App\Infrastructure\ValueObject\String\Name;
-use Spatie\Valuestore\Valuestore;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
@@ -26,7 +26,7 @@ class GenerateCardConsoleCommand extends Command
 {
     public function __construct(
         public readonly CommandBus $commandBus,
-        private readonly Valuestore $valuestore
+        private readonly CardRepository $cardRepository
     ) {
         parent::__construct();
     }
@@ -56,7 +56,7 @@ class GenerateCardConsoleCommand extends Command
 
             $table = new Table($output);
             $table
-                ->setHeaders([[new TableCell('Generating a Pokémon card with following options', ['colspan' => 2])]])
+                ->setHeaders([[new TableCell('Generating a Pokémon card with following options. This might take a few seconds...', ['colspan' => 2])]])
                 ->setRows([
                     ['Card type', sprintf('<fg=%s>●</> %s', $cardType->getColor(), ucfirst($cardType->value))],
                     ['Pokémon rarity', ucfirst($rarity->value)],
@@ -72,7 +72,7 @@ class GenerateCardConsoleCommand extends Command
                 $size,
             ));
 
-            $metadata = $this->valuestore->get((string) $cardId);
+            $metadata = $this->cardRepository->find($cardId)['metadata'];
             $table = new Table($output);
             $table
                 ->setColumnMaxWidth(1, 100)

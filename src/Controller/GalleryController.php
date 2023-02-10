@@ -11,7 +11,7 @@ class GalleryController
 {
     public function __construct(
         private readonly CardRepository $cardRepository,
-        private readonly Environment $twig
+        private readonly Environment $twig,
     ) {
     }
 

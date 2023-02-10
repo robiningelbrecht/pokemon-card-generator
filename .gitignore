@@ -5,4 +5,5 @@ var
 .php-cs-fixer.cache
 .phpunit.result.cache
 public/cards/*.svg
+public/store.json
 store.json

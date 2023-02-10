@@ -17,7 +17,6 @@ use App\Infrastructure\CQRS\DomainCommand;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
 use App\Infrastructure\ValueObject\String\Svg;
-use Spatie\Valuestore\Valuestore;
 use Twig\Environment;
 
 #[AsCommandHandler]
@@ -31,7 +30,6 @@ class GenerateCardCommandHandler implements CommandHandler
         private readonly Environment $twig,
         private readonly OpenAI $openAI,
         private readonly Replicate $replicate,
-        private readonly Valuestore $valueStore,
     ) {
     }
 
@@ -57,8 +55,13 @@ class GenerateCardCommandHandler implements CommandHandler
             CreaturePool::randomByCardType($command->getCardType())
         );
 
-        $name = Name::fromString(rtrim($this->openAI->createCompletion($promptGenerator->forPokemonName()), '.'));
-        $description = Description::fromStringWithMaxChars($this->openAI->createCompletion($promptGenerator->forPokemonDescription($name, $selectedMoves)), 145);
+        $promptForPokemonName = $promptGenerator->forPokemonName();
+        $name = Name::fromString(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'));
+
+        $promptForPokemonDescription = $promptGenerator->forPokemonDescription($name, $selectedMoves);
+        $description = Description::fromStringWithMaxChars($this->openAI->createCompletion($promptForPokemonDescription), 145);
+
+        $promptForPokemonVisual = $promptGenerator->forPokemonVisual();
         $prediction = $this->replicate->predict($promptGenerator->forPokemonVisual());
 
         $countVisualChecks = 0;
@@ -72,15 +75,6 @@ class GenerateCardCommandHandler implements CommandHandler
             $uriToGeneratedVisual = $this->replicate->getPrediction($prediction['id'])['output'][0] ?? null;
             ++$countVisualChecks;
         } while (!$uriToGeneratedVisual);
-
-        // Store some metadata, so we can display it in the CLI.
-        $this->valueStore->put([(string) $command->getCardId() => [
-            'promptForName' => $promptGenerator->forPokemonName(),
-            'promptForDescription' => $promptGenerator->forPokemonDescription($name, $selectedMoves),
-            'promptForVisual' => $promptGenerator->forPokemonVisual(),
-            'generatedName' => $name,
-            'generatedDescription' => $description,
-        ]]);
 
         $template = $this->twig->load('card.html.twig');
         $svg = $template->render([
@@ -97,6 +91,14 @@ class GenerateCardCommandHandler implements CommandHandler
             'moves' => $selectedMoves,
         ]);
 
-        $this->cardRepository->save($command->getCardId(), Svg::fromString($svg));
+        $this->cardRepository->save(
+            $command->getCardId(),
+            Svg::fromString($svg),
+            $promptForPokemonName,
+            $promptForPokemonDescription,
+            $promptForPokemonVisual,
+            $name,
+            $description
+        );
     }
 }
