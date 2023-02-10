@@ -9,6 +9,7 @@
 This PHP script uses AI to generate new, random Pokemon cards by using 
  - GPT to generates names and descriptions
  - Stable Diffusion to create a visual
+ - [PokeApi](https://pokeapi.co/)  for accurate moves sets
 
 First of all, thanks to [Jack](https://github.com/pixegami) for the amazing work 
 on the [Python equivalent](https://github.com/pixegami/pokemon-card-generator) of
@@ -19,7 +20,7 @@ slightly different approach.
 
 |                                                |     This repo    | Jack's repo |
 |------------------------------------------------|:----------------:|:-----------:|
-| AI to generate text                            |      OpenAI      |    OpenAI   |
+| AI to generate name and description            |      OpenAI      |    OpenAI   |
 | AI to generate visual                          | Stable Difussion |  Midjourney |
 | Generate multiple cards at once                |         ❌        |      ✅      |
 | Generate cards of a specific element           |         ✅        |      ✅      |
@@ -83,9 +84,6 @@ You'll be able to view your card and all detailed information used to generate i
 by navigating to the card gallery page: `http://localhost:8080/`.
 
 <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gallery-metadata.png" alt="Metadata">
-
-The moves, weaknesses and resistance are fetched from the [PokeApi](https://pokeapi.co/) 
-and thus should be accurate.
 
 ### CLI command options
 
