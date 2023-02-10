@@ -28,7 +28,7 @@ slightly different approach.
 | Fully generate a card with one command         |         ✅        |      ❌      |
 | Gallery with overview of generated cards       |         ✅        |      ❌      |
 
-*not until Midjourney opens up a public API 
+<sub>*not until Midjourney opens up a public API </sub>
 
 
 ## Installation
@@ -69,11 +69,32 @@ REPLICATE_API_KEY=your-replicate-api-key
 
 ## Generate your first card
 
-- Commands
-- Uses PokeAPi for moves
-- show CLI output
-- Link to gallery page
+At this point, you should be locked and loaded to generate your first Pokémon card, by running
 
+```bash
+docker-compose run --rm php-cli bin/console app:card:generate
+```
+
+Your CLI should output something along the lines of
+
+<img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/cli-output.png" alt="CLI output">
+
+You'll be able to view your card and all detailed information used to generate it, 
+by navigating to the [card gallery](http://localhost:8080/).
+
+<img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gallery-metadata.png" alt="Metadata">
+
+The moves, weaknesses and resistance are fetched from the [PokeApi](https://pokeapi.co/) 
+and thus should be accurate.
+
+### CLI command options
+
+```
+-t, --cardType[=CARDTYPE]  The card type you want to generate, omit to use a random one. Valid options are dark, electric, fighting, fire, grass, normal, psychic, steel, water
+-r, --rarity[=RARITY]      The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are common, uncommon, rare
+-s, --size[=SIZE]          The size of the Pokémon you want to generate, omit to use a random one. Valid options are xl, l, m, s, xs
+-h, --help                 Display help for the given command. When no command is given display help for the list command
+```
 
 ## Acknowledgements
 
