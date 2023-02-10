@@ -31,7 +31,6 @@ although I came up with a slightly different approach.
 
 <sub>*not until Midjourney opens up a public API </sub>
 
-
 ## Installation
 
 ```bash
@@ -58,6 +57,9 @@ For this script to work you'll need two different API keys
 
 The model used for generating visuals is [OpenJourney](https://replicate.com/prompthero/openjourney).
 It's a Stable Diffusion model fine-tuned on Midjourney v4 images.
+
+<sub>Both accounts have free tiers at first, but after a while you will need to enter
+credit card details. It'll cost you around 1-2 cents to generate a card.</sub>
 
 ### .env
 
