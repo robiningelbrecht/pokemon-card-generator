@@ -80,7 +80,7 @@ Your CLI should output something along the lines of
 <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/cli-output.png" alt="CLI output">
 
 You'll be able to view your card and all detailed information used to generate it, 
-by navigating to the [card gallery](http://localhost:8080/).
+by navigating to the card gallery page: `http://localhost:8080/`.
 
 <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gallery-metadata.png" alt="Metadata">
 
@@ -95,6 +95,9 @@ and thus should be accurate.
 -s, --size[=SIZE]          The size of the Pokémon you want to generate, omit to use a random one. Valid options are xl, l, m, s, xs
 -h, --help                 Display help for the given command. When no command is given display help for the list command
 ```
+
+## Examples
+
 
 ## Acknowledgements
 
