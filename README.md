@@ -1,7 +1,7 @@
 <h1 align="center">Pokemon card generator</h1>
 
 <p align="center">
-	<img src="readme/banner.png" alt="Banner">
+  <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/banner.png" alt="Banner">
 </p>
 
 ---
