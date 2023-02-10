@@ -9,7 +9,7 @@
 This PHP script uses AI to generate new, random Pokemon cards by using 
  - GPT to generate a name and description
  - Stable Diffusion to create a visual
- - [PokeApi](https://pokeapi.co/) for accurate moves sets
+ - [PokeApi](https://pokeapi.co/) for accurate moves sets and element types
 
 First of all, thanks to [Jack](https://github.com/pixegami) for the amazing work 
 on the [Python equivalent](https://github.com/pixegami/pokemon-card-generator) of
