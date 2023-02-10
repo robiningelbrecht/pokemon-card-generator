@@ -1,0 +1,6 @@
+[
+    "amqp:consume",
+    "app:card:generate",
+    "app:database:init",
+    "cache:clear"
+]

@@ -1,0 +1,68 @@
+{
+  "name": "robiningelbrecht/php-slim-skeleton",
+  "keywords": [
+    "Slim",
+    "Framework",
+    "Skeleton",
+    "DDD",
+    "AMQP",
+    "CQRS"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robin Ingelbrecht",
+      "email": "ingelbrecht_robin@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "ext-json": "*",
+    "ext-pcntl": "*",
+    "ext-sockets": "*",
+    "guzzlehttp/guzzle": "^7.0",
+    "lcobucci/clock": "^2.2",
+    "openai-php/client": "^0.3.0",
+    "php-amqplib/php-amqplib": "^3.5",
+    "php-di/php-di": "^6.4",
+    "php-di/slim-bridge": "^3.2",
+    "rakibtg/sleekdb": "^2.15",
+    "ramsey/uuid": "^4.3",
+    "slim/psr7": "^1.5",
+    "slim/slim": "^4.11",
+    "spatie/valuestore": "^1.3",
+    "symfony/cache": "^6.1",
+    "symfony/console": "^6.1",
+    "symfony/finder": "^6.1",
+    "thecodingmachine/safe": "^2.2",
+    "twig/twig": "^3.4",
+    "vlucas/phpdotenv": "^5.4"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.9",
+    "phpstan/phpstan": "^1.8",
+    "phpunit/phpunit": "^9.5",
+    "spatie/phpunit-snapshot-assertions": "^4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "lint:fix": " ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+    "phpstan:run": " ./vendor/bin/phpstan analyse --memory-limit=1G",
+    "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G",
+    "post-create-project-cmd": [
+      "cp ./.env.dist ./.env"
+    ]
+  }
+}

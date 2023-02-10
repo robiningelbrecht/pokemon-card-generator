@@ -1,0 +1,21 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Expression in empty\\(\\) is always falsy\\.$#"
+			count: 1
+			path: src/Infrastructure/AMQP/Queue/AmqpQueue.php
+
+		-
+			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
+			count: 2
+			path: src/Infrastructure/Attribute/ClassAttributeCache.php
+
+		-
+			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
+			count: 1
+			path: src/Infrastructure/Attribute/ClassAttributeResolver.php
+
+		-
+			message: "#^Parameter \\#3 \\$depth of function Safe\\\\json_decode expects int\\<1, max\\>, int given\\.$#"
+			count: 1
+			path: src/Infrastructure/Serialization/Json.php

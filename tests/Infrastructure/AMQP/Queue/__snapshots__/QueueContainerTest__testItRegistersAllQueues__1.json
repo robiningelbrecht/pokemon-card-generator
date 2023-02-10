@@ -1,0 +1,7 @@
+{
+    "generate-card-command-queue": {
+        "queueName": "generate-card-command-queue",
+        "workerName": "command-queue-worker",
+        "numberOfConsumers": 1
+    }
+}

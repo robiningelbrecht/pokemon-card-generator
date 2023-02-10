@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    container_name: pokemon-card-generator-rabbitmq
+    image: rabbitmq:3.8-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+
+  php-cli:
+    build: ./docker/php-cli
+    container_name: pokemon-card-generator-php-cli
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+
+  php-fpm:
+    build: ./docker/php-fpm
+    container_name: pokemon-card-generator-php-fpm
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+    depends_on:
+      - rabbitmq
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: pokemon-card-generator-nginx
+    ports:
+      - '8080:80'
+    volumes:
+      - ./public/:/var/www/public/
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php-fpm
+

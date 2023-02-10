@@ -1,0 +1,14 @@
+[
+    {
+        "eventName": "App.Tests.Infrastructure.Eventing.TestEvent",
+        "payload": {
+            "id": "1"
+        }
+    },
+    {
+        "eventName": "App.Tests.Infrastructure.Eventing.TestEvent",
+        "payload": {
+            "id": "1"
+        }
+    }
+]

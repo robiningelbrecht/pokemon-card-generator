@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" width="474" height="659">
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                @font-face {
+                    font-family: 'Cabin';
+                    font-style: normal;
+                    font-weight: 400;
+                    src: url({{ font64('cabin-v26-latin-regular.woff') }}) format('woff'),
+                        url({{ font64('cabin-v26-latin-regular.woff2') }}) format('woff2');
+                }
+                @font-face {
+                    font-family: 'Cabin';
+                    font-style: normal;
+                    font-weight: 700;
+                    src: url({{ font64('cabin-v26-latin-700.woff') }}) format('woff'),
+                    url({{ font64('cabin-v26-latin-700.woff2') }}) format('woff2');
+                }
+
+                .card {
+                    width: 474px;
+                    height: 659px;
+                    position: relative;
+                    color: #1D160E;
+                    font-family: 'Cabin', sans-serif;
+                    font-weight: normal;
+                    background: url('{{ image64('assets/cards/'~element~'.png') }}') no-repeat;
+                }
+
+                .card.type--dark {
+                    color: #ffffff;
+                }
+
+                .card > .top {
+                    display: flex;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 40px;
+                    left: 49px;
+                    font-weight: 700;
+                    font-size: 26px;
+                    width: 336px;
+                }
+
+                .card > .top .hp {
+                    color: #FC0D05;
+                }
+
+                .card > .visual {
+                    display: flex;
+                    justify-content: center;
+                    position: absolute;
+                    width: 359px;
+                    height: 254px;
+                    top: 84px;
+                    left: 58px;
+                    overflow: hidden;
+                }
+
+                .card > .visual img {
+                    height: 100%;
+                }
+
+                .card > .dimensions {
+                    position: absolute;
+                    top: 355px;
+                    left: 69px;
+                    width: 338px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    text-align: center;
+                }
+
+                .card.type--dark > .dimensions {
+                    color: #1D160E;
+                }
+
+                .card > .attacks {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    position: absolute;
+                    top: 380px;
+                    left: 49px;
+                    width: 378px;
+                    height: 145px;
+                    overflow: hidden;
+                }
+
+                .card > .attacks .attack {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 10px;
+                    height: 60px;
+                }
+
+                .card > .attacks .attack:nth-child(2) {
+                    border-top: 2px solid #000000;
+                    padding-top: 10px;
+                    margin-top: 10px;
+                }
+
+                .card > .attacks .attack .elements {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    width: 60px;
+                }
+
+                .card > .attacks .attack .elements img {
+                    width: 50%;
+                }
+
+                .card > .attacks .attack .name-description {
+                    flex: 1;
+                    max-height: 40px;
+                    overflow: hidden;
+                    text-align: center;
+                }
+
+                .card > .attacks .attack .name-description .name {
+                    font-weight: 700;
+                }
+
+                .card > .attacks .attack .name-description .description {
+                    font-size: 12px;
+                }
+
+                .card > .attacks .attack .damage {
+                    font-size: 24px;
+                }
+
+                .card > .resistance-and-weakness {
+                    position: absolute;
+                    top: 558px;
+                    left: 46px;
+                    width: 382px;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 22px;
+                    box-sizing: border-box;
+                }
+
+                .card > .resistance-and-weakness img {
+                    width: 20px;
+                }
+
+                .card > .resistance-and-weakness > div {
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .card .resistance-and-weakness .weakness {
+                    left: 4px;
+                    width: 55px;
+                }
+
+                .card .resistance-and-weakness .resistance {
+                    left: 161px;
+                    width: 60px;
+                }
+
+                .card .resistance-and-weakness .retreat-cost {
+                    left: 308px;
+                    width: 71px;
+                }
+
+                .card > .description {
+                    position: absolute;
+                    top: 587px;
+                    left: 46px;
+                    width: 382px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    text-align: center;
+                }
+            </style>
+
+            <div class="card type--{{ element }}">
+                <div class="top">
+                    <div class="name">{{ name }}</div>
+                    <div class="hp">{{ hp }} HP</div>
+                </div>
+                <div class="visual">
+                    <img src="{{ image64(visual) }}"/>
+                </div>
+                <div class="dimensions">
+                    {{ element|capitalize }} Pokémon. Height: {{ height }}, Weight: {{ weight }}lbs.
+                </div>
+                <div class="attacks">
+                    {% for move in moves %}
+                        <div class="attack">
+                            <div class="elements">
+                                {% for element in move.getCost() %}
+                                    <img src="{{ image64('assets/elements/small/'~element.value~'.png') }}"/>
+                                {% endfor %}
+                            </div>
+                            <div class="name-description">
+                                <span class="name">{{ move.getLabel() }}</span>
+                                <span class="description">{{ move.getDescription() }}</span>
+                            </div>
+                            <div class="damage">{{ move.getPower() }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="resistance-and-weakness">
+                    <div class="weakness">
+                        {% for element in weakness[:3] %}
+                            <img src="{{ image64('assets/elements/small/'~element.value~'.png') }}"/>
+                        {% endfor %}
+                    </div>
+                    <div class="resistance">
+                        {% for element in resistance[:3] %}
+                            <img src="{{ image64('assets/elements/small/'~element.value~'.png') }}"/>
+                        {% endfor %}
+                    </div>
+                    <div class="retreat-cost">
+                        {% for i in 1..retreatCost %}
+                            <img src="{{ image64('assets/elements/small/normal.png') }}"/>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="description">
+                    {{ description }}
+                </div>
+            </div>
+        </div>
+    </foreignObject>
+</svg>

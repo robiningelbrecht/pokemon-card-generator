@@ -1,0 +1,6 @@
+{
+    "eventName": "App.Tests.Infrastructure.Eventing.TestEvent",
+    "payload": {
+        "id": "1"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "commandName": "App.Tests.Infrastructure.CQRS.TestCommand",
+    "payload": {
+        "metadata": {
+            "key": "value override",
+            "key2": "value"
+        }
+    }
+}
