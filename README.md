@@ -69,7 +69,7 @@ REPLICATE_API_KEY=your-replicate-api-key
 
 ## Generate your first card
 
-At this point, you should be locked and loaded to generate your first Pokémon card, by running
+At this point, you should be locked and loaded to generate your first Pokémon card by running
 
 ```bash
 docker-compose run --rm php-cli bin/console app:card:generate
