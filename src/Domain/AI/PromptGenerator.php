@@ -56,11 +56,8 @@ class PromptGenerator
 
     public function forPokemonVisual(): Prompt
     {
-        // mdjrny-v4 style fire-type pokemon, lizard, armor, dessert, chibi, anime, full body portrait, centered
-        // mdjrny-v4 style portrait of steel-type pokemon, lion, mountain, chibi
-        // mdjrny-v4 style portrait of grass-type pokemon, digital art, sugimori, full body
-        // https://replicate.com/prompthero/openjourney
-
+        // When visual generation is switched to MJ, we can update the prompt to something like:
+        // a chibi young fire-type pokemon::1.8, a parrot, in a volcano environment, lava texture background, anime chibi drawing style, pastel background --niji --ar 3:2
         $segments = [
             'mdjrny-v4 style portrait of '.$this->cardType->value.'-type pokemon',
             'digital art',

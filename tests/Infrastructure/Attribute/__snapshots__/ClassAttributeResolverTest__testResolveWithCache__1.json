@@ -1,5 +1,4 @@
 [
-    "App\\Console\\AmqpConsumeConsoleCommand",
     "App\\Console\\CacheClearConsoleCommand",
     "App\\Console\\GenerateCardConsoleCommand",
     "App\\Console\\InitializeDatabaseConsoleCommand"
