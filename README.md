@@ -13,8 +13,8 @@ This PHP script uses AI to generate new, random Pokemon cards by using
 
 First of all, thanks to [Jack](https://github.com/pixegami) for the amazing work 
 on the [Python equivalent](https://github.com/pixegami/pokemon-card-generator) of
-this repository. I came up with the idea because of him, although I came up with a
-slightly different approach.
+this repository. I was inspired by his creativity to generate Pokémon cards out of thin air, 
+although I came up with a slightly different approach.
 
 ### Comparison
 
