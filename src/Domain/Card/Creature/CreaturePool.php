@@ -295,6 +295,6 @@ class CreaturePool
             }
         }
 
-        return Creature::fromNameAndAttributes($subject, CreatureAttribute::wearingArmor());
+        return Creature::fromNameAndAttributes($subject);
     }
 }

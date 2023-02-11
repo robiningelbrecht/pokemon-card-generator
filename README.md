@@ -45,7 +45,7 @@ For this script to work you'll need two different API keys
 
 ### OpenAI
 
-* Set up an OpenAI account bynavigating to https://beta.openai.com/signup
+* Set up an OpenAI account by navigating to https://beta.openai.com/signup
 * Create an API key on https://platform.openai.com/account/api-keys
 
 ### Replicate.com

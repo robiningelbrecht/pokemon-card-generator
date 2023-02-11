@@ -10,6 +10,7 @@ use App\Domain\Card\GenerateCard\GenerateCard;
 use App\Domain\Pokemon\PokemonRarity;
 use App\Domain\Pokemon\PokemonSize;
 use App\Infrastructure\CQRS\CommandBus;
+use App\Infrastructure\ValueObject\String\Name;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
@@ -59,7 +60,7 @@ class GenerateCardConsoleCommand extends Command
                 $cardType = $input->getOption('cardType') ? CardType::from($input->getOption('cardType')) : $cardTypes[array_rand($cardTypes)];
                 $rarity = $input->getOption('rarity') ? PokemonRarity::from($input->getOption('rarity')) : $rarities[array_rand($rarities)];
                 $size = $input->getOption('size') ? PokemonSize::from($input->getOption('size')) : $sizes[array_rand($sizes)];
-                $creature = $input->getOption('creature') ? CreaturePool::matchBySubject($input->getOption('creature')) : CreaturePool::randomByCardType($cardType);
+                $creature = $input->getOption('creature') ? CreaturePool::matchBySubject(Name::fromString($input->getOption('creature'))) : CreaturePool::randomByCardType($cardType);
 
                 $table = new Table($output);
                 $table
