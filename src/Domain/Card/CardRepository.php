@@ -36,7 +36,7 @@ class CardRepository
     {
         return array_map(
             fn (array $row) => $this->buildFromResult($row),
-            $this->store->findAll(['createdOn' => 'ASC'])
+            $this->store->findAll(['createdOn' => 'DESC'])
         );
     }
 
