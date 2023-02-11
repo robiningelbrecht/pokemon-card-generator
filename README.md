@@ -98,7 +98,7 @@ by navigating to the card gallery page: `http://localhost:8080/`.
 
 ## Examples
 
-There's and example gallery available on https://pokemon-card-generator.robiningelbrecht.be/
+There's an example gallery available on https://pokemon-card-generator.robiningelbrecht.be/
 
 <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gallery-preview.png" alt="Gallery">
 
