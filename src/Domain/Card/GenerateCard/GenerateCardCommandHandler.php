@@ -30,7 +30,8 @@ class GenerateCardCommandHandler implements CommandHandler
         private readonly Environment $twig,
         private readonly OpenAI $openAI,
         private readonly Replicate $replicate,
-    ) {
+    )
+    {
     }
 
     public function handle(DomainCommand $command): void
@@ -52,7 +53,7 @@ class GenerateCardCommandHandler implements CommandHandler
             $command->getCardType(),
             $command->getPokemonRarity(),
             $command->getPokemonSize(),
-            CreaturePool::randomByCardType($command->getCardType())
+            $command->getCreature(),
         );
 
         $promptForPokemonName = $promptGenerator->forPokemonName();
