@@ -27,7 +27,7 @@ class PromptGenerator
     public function forPokemonName(): Prompt
     {
         return Prompt::fromString(sprintf(
-            'Generate a unique, original, creative, %s pokemon name for %s %s. It can be found in %s-like environments. Do not use the words pokemon or %s:',
+            'Generate a unique, original, creative, %s pokemon name for %s %s. It can be found in %s-like environments. Do not use the words pokemon or %s. Ony answer with the generated name:',
             PokemonRarity::UNCOMMON === $this->pokemonRarity ? 'short, single-word' : 'single-word',
             implode(' ', $this->buildSubjectDescription()),
             $this->detail,

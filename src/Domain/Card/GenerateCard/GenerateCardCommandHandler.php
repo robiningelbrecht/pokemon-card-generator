@@ -58,7 +58,7 @@ class GenerateCardCommandHandler implements CommandHandler
         );
 
         $promptForPokemonName = $promptGenerator->forPokemonName();
-        $name = Name::fromString(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'));
+        $name = Name::fromString($this->openAI->createCompletion($promptForPokemonName));
 
         $promptForPokemonDescription = $promptGenerator->forPokemonDescription($name, $selectedMoves);
         $description = Description::fromStringWithMaxChars($this->openAI->createCompletion($promptForPokemonDescription), 145);
