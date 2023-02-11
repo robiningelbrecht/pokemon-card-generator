@@ -15,6 +15,11 @@
             font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
         }
 
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+
         .gallery {
             display: flex;
             justify-content: center;
@@ -22,43 +27,41 @@
             flex-wrap: wrap;
         }
 
-        .gallery img {
+        .card{
+            width: 800px;
+            padding: 2em;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+        }
+
+        .card h3 {
+            margin: 0;
+        }
+
+        .card label {
+            font-weight: 600;
+        }
+
+        .card .visual {
+            width: 200px;
+        }
+
+        .card .visual img{
             max-width: 100%;
         }
 
-        @media (min-width: calc((474px * 2)) ) {
-            .gallery {
-                width: calc((474px * 2));
-            }
-
-            .gallery > a {
-                width: calc(50% - var(--gap-width));
-            }
-        }
-
-        @media (min-width: calc((474px * 3)) ) {
-            .gallery {
-                width: calc((474px * 3));
-            }
-
-            .gallery > a {
-                width: calc(33% - var(--gap-width));
-            }
-        }
-
-        @media (min-width: calc((474px * 4)) ) {
-            .gallery {
-                width: calc((474px * 4));
-            }
-
-            .gallery > a {
-                width: calc(25% - var(--gap-width));
-            }
+        .card .metadata {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
         }
 
         .modal-window {
             position: fixed;
-            background-color: rgba(255, 255, 255, 0.25);
+            background-color: rgba(0, 0, 0, 0.25);
             top: 0;
             right: 0;
             bottom: 0;
@@ -77,7 +80,6 @@
         }
 
         .modal-window > div {
-            width: 800px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -85,31 +87,6 @@
             padding: 2em;
             background: white;
             border-radius: 1rem;
-        }
-
-        .modal-window > div .inner {
-            display: flex;
-            align-items: center;
-            column-gap: 20px;
-        }
-
-        .modal-window > div .inner .visual {
-            width: 200px;
-        }
-
-        .modal-window > div .inner .metadata {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            row-gap: 10px;
-        }
-
-        .modal-window > div .inner .metadata h3 {
-            margin: 0;
-        }
-
-        .modal-window > div label {
-            font-weight: 600;
         }
 
         .modal-close {
@@ -133,27 +110,29 @@
 <body>
 <div class="gallery">
     {% for card in cards %}
-        <a href="#open-modal-{{ card.cardId }}"><img src="{{ card.uri }}" alt="card"/></a>
-        <div id="open-modal-{{ card.cardId }}" class="modal-window">
-            <div>
-                <a href="#" title="Close" class="modal-close">Close</a>
-                <div class="inner">
-                    <div class="visual">
-                        <img src="{{ card.uri }}" alt="card"/>
+        <a href="#open-modal-{{ card.getCardId() }}">
+            <div class="card">
+                <div class="visual">
+                    <img src="{{ card.getUri() }}" alt="card"/>
+                </div>
+                <div class="metadata">
+                    <h3>Used Prompts</h3>
+                    <div>
+                        <label>Name: </label><code>{{ card.getPromptForPokemonName() }}</code>
                     </div>
-                    <div class="metadata">
-                        <h3>Used Prompts</h3>
-                        <div>
-                            <label>Name: </label><code>{{ card.metadata.promptForName ?: 'Hmmmm, we lost track of this data...'  }}</code>
-                        </div>
-                        <div>
-                            <label>Description: </label><code>{{ card.metadata.promptForDescription ?: 'Hmmmm, we lost track of this data...' }}</code>
-                        </div>
-                        <div>
-                            <label>Visual: </label><code>{{ card.metadata.promptForVisual ?: 'Hmmmm, we lost track of this data...' }}</code>
-                        </div>
+                    <div>
+                        <label>Description: </label><code>{{ card.getPromptForPokemonDescription() }}</code>
+                    </div>
+                    <div>
+                        <label>Visual: </label><code>{{ card.getPromptForVisual() }}</code>
                     </div>
                 </div>
+            </div>
+        </a>
+        <div id="open-modal-{{ card.getCardId() }}" class="modal-window">
+            <div>
+                <a href="#" title="Close" class="modal-close">X</a>
+                <img src="{{ card.getUri() }}" alt="card"/>
             </div>
         </div>
     {% endfor %}

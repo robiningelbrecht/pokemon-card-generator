@@ -8,17 +8,16 @@ use App\Infrastructure\Exception\EntityNotFound;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
 use App\Infrastructure\ValueObject\String\Svg;
-use Spatie\Valuestore\Valuestore;
-use Symfony\Component\Finder\Finder;
+use SleekDB\Store;
 
 class CardRepository
 {
     public function __construct(
-        private readonly Valuestore $valueStore,
+        private readonly Store $store
     ) {
     }
 
-    public function find(CardId $cardId): array
+    public function find(CardId $cardId): Card
     {
         $file = Settings::getAppRoot().'/public/cards/'.$cardId.'.svg';
 
@@ -26,49 +25,49 @@ class CardRepository
             throw new EntityNotFound(sprintf('Card "%s" not found', $cardId));
         }
 
-        $metadata = $this->valueStore->get((string) $cardId);
+        if (!$row = $this->store->findOneBy(['cardId', '==', $cardId])) {
+            throw new EntityNotFound(sprintf('Card "%s" not found', $cardId));
+        }
 
-        return [
-            'cardId' => $cardId,
-            'uri' => 'cards/'.$cardId.'.svg',
-            'metadata' => $metadata,
-        ];
+        return $this->buildFromResult($row);
     }
 
     public function findAll(): array
     {
-        $finder = new Finder();
-        $finder->files()->in(Settings::getAppRoot().'/public/cards')->name('*.svg')->sortByModifiedTime();
-
-        $cards = [];
-        foreach ($finder as $file) {
-            /* @var \Symfony\Component\Finder\SplFileInfo $file */
-            $cardId = CardId::fromString(str_replace('.svg', '', $file->getFilename()));
-            $cards[] = $this->find($cardId);
-        }
-
-        return array_reverse($cards);
+        return array_map(
+            fn (array $row) => $this->buildFromResult($row),
+            $this->store->findAll(['createdOn' => 'ASC'])
+        );
     }
 
     public function save(
-        CardId $cardId,
+        Card $card,
         Svg $svg,
-        Prompt $promptForPokemonName,
-        Prompt $promptForPokemonDescription,
-        Prompt $promptForVisual,
-        Name $generatedName,
-        Description $generatedDescription): void
-    {
-        $file = Settings::getAppRoot().'/public/cards/'.$cardId.'.svg';
+      ): void {
+        $file = Settings::getAppRoot().'/public/cards/'.$card->getCardId().'.svg';
         file_put_contents($file, $svg);
 
-        // Store some metadata, so we can display it in the CLI and UI.
-        $this->valueStore->put([(string) $cardId => [
-            'promptForName' => $promptForPokemonName,
-            'promptForDescription' => $promptForPokemonDescription,
-            'promptForVisual' => $promptForVisual,
-            'generatedName' => $generatedName,
-            'generatedDescription' => $generatedDescription,
-        ]]);
+        $this->store->updateOrInsert([
+            'cardId' => $card->getCardId(),
+            'promptForName' => $card->getPromptForPokemonName(),
+            'promptForDescription' => $card->getPromptForPokemonDescription(),
+            'promptForVisual' => $card->getPromptForVisual(),
+            'generatedName' => $card->getGeneratedName(),
+            'generatedDescription' => $card->getGeneratedDescription(),
+            'createdOn' => $card->getCreatedOn()->getTimestamp(),
+        ]);
+    }
+
+    private function buildFromResult(array $result): Card
+    {
+        return Card::fromState(
+            CardId::fromString($result['cardId']),
+            Prompt::fromString($result['promptForName']),
+            Prompt::fromString($result['promptForDescription']),
+            Prompt::fromString($result['promptForVisual']),
+            Name::fromString($result['generatedName']),
+            Description::fromString($result['generatedDescription']),
+            (new \DateTimeImmutable())->setTimestamp($result['createdOn'])
+        );
     }
 }

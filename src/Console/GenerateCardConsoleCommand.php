@@ -10,7 +10,6 @@ use App\Domain\Card\GenerateCard\GenerateCard;
 use App\Domain\Pokemon\PokemonRarity;
 use App\Domain\Pokemon\PokemonSize;
 use App\Infrastructure\CQRS\CommandBus;
-use App\Infrastructure\ValueObject\String\Name;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
@@ -28,8 +27,7 @@ class GenerateCardConsoleCommand extends Command
     public function __construct(
         public readonly CommandBus $commandBus,
         private readonly CardRepository $cardRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -38,9 +36,9 @@ class GenerateCardConsoleCommand extends Command
         parent::configure();
 
         $this
-            ->addOption('cardType', 't', InputOption::VALUE_OPTIONAL, 'The card type you want to generate, omit to use a random one. Valid options are ' . implode(', ', array_map(fn(CardType $cardType) => $cardType->value, CardType::cases())))
-            ->addOption('rarity', 'r', InputOption::VALUE_OPTIONAL, 'The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are ' . implode(', ', array_map(fn(PokemonRarity $rarity) => $rarity->value, PokemonRarity::cases())))
-            ->addOption('size', 's', InputOption::VALUE_OPTIONAL, 'The size of the Pokémon you want to generate, omit to use a random one. Valid options are ' . implode(', ', array_map(fn(PokemonSize $size) => $size->value, PokemonSize::cases())))
+            ->addOption('cardType', 't', InputOption::VALUE_OPTIONAL, 'The card type you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (CardType $cardType) => $cardType->value, CardType::cases())))
+            ->addOption('rarity', 'r', InputOption::VALUE_OPTIONAL, 'The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonRarity $rarity) => $rarity->value, PokemonRarity::cases())))
+            ->addOption('size', 's', InputOption::VALUE_OPTIONAL, 'The size of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonSize $size) => $size->value, PokemonSize::cases())))
             ->addOption('creature', 'c', InputOption::VALUE_OPTIONAL, 'The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one');
     }
 
@@ -76,14 +74,14 @@ class GenerateCardConsoleCommand extends Command
                 $creature,
             ));
 
-            $metadata = $this->cardRepository->find($cardId)['metadata'];
+            $card = $this->cardRepository->find($cardId);
             $table = new Table($output);
             $table
                 ->setColumnMaxWidth(1, 100)
                 ->setHeaders([[new TableCell('Used prompts', ['colspan' => 2])]])
-                ->addRow(['Name', $metadata['promptForName'] . "\n"])
-                ->addRow(['Description', $metadata['promptForDescription'] . "\n"])
-                ->addRow(['Visual', $metadata['promptForVisual'] . "\n"])
+                ->addRow(['Name', $card->getPromptForPokemonName()."\n"])
+                ->addRow(['Description', $card->getPromptForPokemonDescription()."\n"])
+                ->addRow(['Visual', $card->getPromptForVisual()."\n"])
                 ->addRow(new TableSeparator())
                 ->addRow([new TableCell(
                     'Generated content',
@@ -95,8 +93,8 @@ class GenerateCardConsoleCommand extends Command
                     ]
                 )])
                 ->addRow(new TableSeparator())
-                ->addRow(['Name', $metadata['generatedName'] . "\n"])
-                ->addRow(['Description', $metadata['generatedDescription'] . "\n"])
+                ->addRow(['Name', $card->getGeneratedName()."\n"])
+                ->addRow(['Description', $card->getGeneratedDescription()."\n"])
                 ->addRow(['Card', sprintf('http://localhost:8080/cards/%s.svg', $cardId)])
                 ->render();
         } catch (\Throwable $e) {

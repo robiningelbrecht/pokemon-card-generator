@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\AI\ReplicateApiKey;
+use App\Domain\Card\CardRepository;
 use App\Domain\Pokemon\Move\PokemonMoveRepository;
 use App\Domain\Pokemon\Type\PokemonTypeRepository;
 use App\Infrastructure\Console\ConsoleCommandContainer;
@@ -12,7 +13,6 @@ use Lcobucci\Clock\Clock;
 use Lcobucci\Clock\SystemClock;
 use OpenAI\Client;
 use SleekDB\Store;
-use Spatie\Valuestore\Valuestore;
 use Symfony\Component\Console\Application;
 use Twig\Environment as TwigEnvironment;
 use Twig\Loader\FilesystemLoader;
@@ -33,9 +33,12 @@ return [
         'primary_key' => 'id',
         'timeout' => false,
     ])),
+    CardRepository::class => DI\autowire()->constructorParameter('store', new Store('cards', $appRoot.'/database', [
+        'auto_cache' => false,
+        'timeout' => false,
+    ])),
     ReplicateApiKey::class => fn () => ReplicateApiKey::fromString($_ENV['REPLICATE_API_KEY']),
     Client::class => fn () => OpenAI::client($_ENV['OPEN_AI_API_KEY']),
-    Valuestore::class => fn () => Valuestore::make($appRoot.'/'.$_ENV['VALUE_STORE_PATH']),
     // Clock.
     Clock::class => DI\factory([SystemClock::class, 'fromSystemTimezone']),
     // Twig Environment.

@@ -5,10 +5,10 @@ namespace App\Domain\Card\GenerateCard;
 use App\Domain\AI\OpenAI;
 use App\Domain\AI\PromptGenerator;
 use App\Domain\AI\Replicate;
+use App\Domain\Card\Card;
 use App\Domain\Card\CardRandomizer;
 use App\Domain\Card\CardRepository;
 use App\Domain\Card\CardType;
-use App\Domain\Card\Creature\CreaturePool;
 use App\Domain\Pokemon\Move\PokemonMoveRepository;
 use App\Domain\Pokemon\Type\PokemonTypeRepository;
 use App\Infrastructure\Attribute\AsCommandHandler;
@@ -17,6 +17,7 @@ use App\Infrastructure\CQRS\DomainCommand;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
 use App\Infrastructure\ValueObject\String\Svg;
+use Lcobucci\Clock\Clock;
 use Twig\Environment;
 
 #[AsCommandHandler]
@@ -30,8 +31,8 @@ class GenerateCardCommandHandler implements CommandHandler
         private readonly Environment $twig,
         private readonly OpenAI $openAI,
         private readonly Replicate $replicate,
-    )
-    {
+        private readonly Clock $clock,
+    ) {
     }
 
     public function handle(DomainCommand $command): void
@@ -93,13 +94,16 @@ class GenerateCardCommandHandler implements CommandHandler
         ]);
 
         $this->cardRepository->save(
-            $command->getCardId(),
+            Card::create(
+                $command->getCardId(),
+                $promptForPokemonName,
+                $promptForPokemonDescription,
+                $promptForPokemonVisual,
+                $name,
+                $description,
+                $this->clock->now()
+            ),
             Svg::fromString($svg),
-            $promptForPokemonName,
-            $promptForPokemonDescription,
-            $promptForPokemonVisual,
-            $name,
-            $description
         );
     }
 }
