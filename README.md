@@ -18,16 +18,16 @@ although I came up with a slightly different approach.
 
 ### Comparison
 
-|                                                |     This repo    | Jack's repo |
-|------------------------------------------------|:----------------:|:-----------:|
-| AI to generate name and description            |      OpenAI      |    OpenAI   |
-| AI to generate visual                          | Stable Difussion |  Midjourney |
-| Generate multiple cards at once                |         ❌        |      ✅      |
-| Generate cards of a specific element           |         ✅        |      ✅      |
-| Generate cards of a specific creature*         |         ✅        |      ✅      |
-| Generate a series that evolve from one another |         ❌        |      ✅      |
-| Fully generate a card with one command         |         ✅        |      ❌      |
-| Gallery with overview of generated cards       |         ✅        |      ❌      |
+|                                                 |     This repo    | Jack's repo |
+|-------------------------------------------------|:----------------:|:-----------:|
+| AI to generate name and description             |      OpenAI      |    OpenAI   |
+| AI to generate visual                           | Stable Difussion |  Midjourney |
+| Generate multiple cards at once                 |         ✅        |      ✅      |
+| Generate cards of a specific element            |         ✅        |      ✅      |
+| Generate cards of a specific creature           |         ✅        |      ✅      |
+| Generate a series that evolve from one another  |         ❌        |      ✅      |
+| Fully generate a card with one command          |         ✅        |      ❌      |
+| Gallery with overview of generated cards        |         ✅        |      ❌      |
 
 ## Installation
 
@@ -88,11 +88,12 @@ by navigating to the card gallery page: `http://localhost:8080/`.
 ### CLI command options
 
 ```
--t, --cardType[=CARDTYPE]  The card type you want to generate, omit to use a random one. Valid options are dark, electric, fighting, fire, grass, normal, psychic, steel, water
--r, --rarity[=RARITY]      The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are common, uncommon, rare
--s, --size[=SIZE]          The size of the Pokémon you want to generate, omit to use a random one. Valid options are xl, l, m, s, xs
--c, --creature[=CREATURE]  The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one
--h, --help                 Display help for the given command. When no command is given display help for the list command
+-t, --cardType[=CARDTYPE]              The card type you want to generate, omit to use a random one. Valid options are dark, electric, fighting, fire, grass, normal, psychic, steel, water
+-r, --rarity[=RARITY]                  The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are common, uncommon, rare
+-s, --size[=SIZE]                      The size of the Pokémon you want to generate, omit to use a random one. Valid options are xl, l, m, s, xs
+-c, --creature[=CREATURE]              The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one
+-num, --numberOfCards[=NUMBEROFCARDS]  The number of cards to generate. Number between 1 and 10 [default: 1]
+-h, --help                             Display help for the given command. When no command is given display help for the list command
 ```
 
 ## Examples
