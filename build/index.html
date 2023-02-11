@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+    <style>
+        :root {
+            --card-width: 474px;
+            --gap-width: 10px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        }
+
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: var(--gap-width);
+            flex-wrap: wrap;
+        }
+
+        .card{
+            width: 95%;
+            padding: 2em;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+            background: #eee;
+        }
+
+        @media (min-width: 800px) {
+            .card{
+                width: 800px;
+            }
+        }
+
+        .card h3 {
+            margin: 0;
+        }
+
+        .card label {
+            font-weight: 600;
+        }
+
+        .card .visual {
+            width: 200px;
+        }
+
+        .card .visual img{
+            max-width: 100%;
+        }
+
+        .card .metadata {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        .modal-window {
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.25);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+
+        .modal-window:target {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window > div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2em;
+        }
+
+        .modal-close {
+            font-weight: 600;
+            color: black;
+            line-height: 50px;
+            font-size: 80%;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            top: 0;
+            width: 70px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="gallery">
+    <a href="#open-modal-card-2a911e6d-7b15-450e-b156-5d0af96f130e">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-2a911e6d-7b15-450e-b156-5d0af96f130e.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a dynamic rare deer psychic-type with galaxy-pattern hooves. It can be found in crypt-like environments. Do not use the words pokemon or psychic. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Galaxoedeer, a dynamic rare deer psychic-type pokemon. It can be found in crypt-like environments It has the following abilities: miracle-eye. Be creative about its day-to-day life. Do not use the word deer or psychic or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of psychic-type pokemon, deer-like, digital art, sugimori, chibi, centered, full body, dreamy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-2a911e6d-7b15-450e-b156-5d0af96f130e" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-2a911e6d-7b15-450e-b156-5d0af96f130e.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-a7ad53e5-19fd-4eef-a0fc-fec2b577fbe0">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-a7ad53e5-19fd-4eef-a0fc-fec2b577fbe0.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive rare horse steel-type wearing a ornate mask. It can be found in desert-like environments. Do not use the words pokemon or steel. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Mystikos, a massive rare horse steel-type pokemon. It can be found in desert-like environments It has the following abilities: anchor-shot. Be creative about its day-to-day life. Do not use the word horse or steel or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of steel-type pokemon, horse-like, digital art, sugimori, chibi, centered, full body, metallic ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-a7ad53e5-19fd-4eef-a0fc-fec2b577fbe0" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-a7ad53e5-19fd-4eef-a0fc-fec2b577fbe0.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-9eee232a-14ec-4476-a89e-5c5cd4134126">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-9eee232a-14ec-4476-a89e-5c5cd4134126.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a chibi young simple ladybug grass-type with a green runic crystal core. It can be found in forest-like environments. Do not use the words pokemon or grass. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Verdruna, a chibi young simple ladybug grass-type pokemon. It can be found in forest-like environments It has the following abilities: absorb, double-edge. Be creative about its day-to-day life. Do not use the word ladybug or grass or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of grass-type pokemon, ladybug-like, digital art, sugimori, chibi, centered, full body, emerald galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-9eee232a-14ec-4476-a89e-5c5cd4134126" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-9eee232a-14ec-4476-a89e-5c5cd4134126.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-6932f419-6b4d-4a9c-a035-ca98de71206b">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-6932f419-6b4d-4a9c-a035-ca98de71206b.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive mythical monkey grass-type holding a leafy mace. It can be found in forest-like environments. Do not use the words pokemon or grass. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Leafmace, a massive mythical monkey grass-type pokemon. It can be found in forest-like environments It has the following abilities: leaf-tornado, flower-trick. Be creative about its day-to-day life. Do not use the word monkey or grass or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of grass-type pokemon, monkey-like, digital art, sugimori, chibi, centered, full body, green and teal ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-6932f419-6b4d-4a9c-a035-ca98de71206b" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-6932f419-6b4d-4a9c-a035-ca98de71206b.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-2f0dcf15-a509-493f-9e4c-f22da486e6fc">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-2f0dcf15-a509-493f-9e4c-f22da486e6fc.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a chibi cute simple owl electric-type wearing a ancient crystal headband. It can be found in mountain-like environments. Do not use the words pokemon or electric. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Crystalus, a chibi cute simple owl electric-type pokemon. It can be found in mountain-like environments It has the following abilities: ion-deluge. Be creative about its day-to-day life. Do not use the word owl or electric or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of electric-type pokemon, owl-like, digital art, sugimori, chibi, centered, full body, yellow and teal ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-2f0dcf15-a509-493f-9e4c-f22da486e6fc" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-2f0dcf15-a509-493f-9e4c-f22da486e6fc.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-0bf7a3f2-7494-40b6-9ea6-b8887030627e">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-0bf7a3f2-7494-40b6-9ea6-b8887030627e.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a gigantic basic ibex psychic-type wearing a purple cosmic crystal headband. It can be found in crypt-like environments. Do not use the words pokemon or psychic. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Chrysovix, a gigantic basic ibex psychic-type pokemon. It can be found in crypt-like environments It has the following abilities: light-screen, psyshock. Be creative about its day-to-day life. Do not use the word ibex or psychic or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of psychic-type pokemon, ibex-like, digital art, sugimori, chibi, centered, full body, dreamy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-0bf7a3f2-7494-40b6-9ea6-b8887030627e" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-0bf7a3f2-7494-40b6-9ea6-b8887030627e.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-f4775de0-da9c-4e4f-bc31-089a4a6ca9af">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-f4775de0-da9c-4e4f-bc31-089a4a6ca9af.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a gigantic mythical beetle dark-type with a purple cosmic crystal core. It can be found in cave-like environments. Do not use the words pokemon or dark. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Virella, a gigantic mythical beetle dark-type pokemon. It can be found in cave-like environments It has the following abilities: crunch. Be creative about its day-to-day life. Do not use the word beetle or dark or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of dark-type pokemon, beetle-like, digital art, sugimori, chibi, centered, full body, dreamy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-f4775de0-da9c-4e4f-bc31-089a4a6ca9af" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-f4775de0-da9c-4e4f-bc31-089a4a6ca9af.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-5e1a5f09-fa69-44e0-9d45-c186baa3ce91">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-5e1a5f09-fa69-44e0-9d45-c186baa3ce91.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a dynamic mythical wolf steel-type wearing a white crown. It can be found in mountain-like environments. Do not use the words pokemon or steel. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Crownwolf, a dynamic mythical wolf steel-type pokemon. It can be found in mountain-like environments It has the following abilities: shift-gear. Be creative about its day-to-day life. Do not use the word wolf or steel or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of steel-type pokemon, wolf-like, digital art, sugimori, chibi, centered, full body, grey shadows</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-5e1a5f09-fa69-44e0-9d45-c186baa3ce91" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-5e1a5f09-fa69-44e0-9d45-c186baa3ce91.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-0e72c7c4-42ef-4c54-a2b2-495b74d528d9">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-0e72c7c4-42ef-4c54-a2b2-495b74d528d9.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive mythical ostrich electric-type wearing a yellow and black crown. It can be found in mountain-like environments. Do not use the words pokemon or electric. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Torryn, a massive mythical ostrich electric-type pokemon. It can be found in mountain-like environments It has the following abilities: bolt-beak. Be creative about its day-to-day life. Do not use the word ostrich or electric or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of electric-type pokemon, ostrich-like, digital art, sugimori, chibi, centered, full body, yellow and teal ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-0e72c7c4-42ef-4c54-a2b2-495b74d528d9" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-0e72c7c4-42ef-4c54-a2b2-495b74d528d9.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-4d76feb4-a682-43e2-880f-26766245f834">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-4d76feb4-a682-43e2-880f-26766245f834.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a gigantic simple lynx fire-type with ruby claws. It can be found in volcano-like environments. Do not use the words pokemon or fire. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Flaraxe, a gigantic simple lynx fire-type pokemon. It can be found in volcano-like environments It has the following abilities: ember. Be creative about its day-to-day life. Do not use the word lynx or fire or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fire-type pokemon, lynx-like, digital art, sugimori, chibi, centered, full body, orange galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-4d76feb4-a682-43e2-880f-26766245f834" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-4d76feb4-a682-43e2-880f-26766245f834.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-f55eb155-2797-4f67-b1a3-ddc38ad9c97b">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-f55eb155-2797-4f67-b1a3-ddc38ad9c97b.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi young mythical fox steel-type with golden fur. It can be found in desert-like environments. Do not use the words pokemon or steel. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Furnyx, a chibi young mythical fox steel-type pokemon. It can be found in desert-like environments It has the following abilities: autotomize. Be creative about its day-to-day life. Do not use the word fox or steel or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of steel-type pokemon, fox-like, digital art, sugimori, chibi, centered, full body, grey galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-f55eb155-2797-4f67-b1a3-ddc38ad9c97b" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-f55eb155-2797-4f67-b1a3-ddc38ad9c97b.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-ce9c2f1c-b3ab-43f9-9288-4d61a5477f8c">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-ce9c2f1c-b3ab-43f9-9288-4d61a5477f8c.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a chibi cute simple parrot normal-type with a prismatic tail. It can be found in village-like environments. Do not use the words pokemon or normal. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Frecklefin, a chibi cute simple parrot normal-type pokemon. It can be found in village-like environments It has the following abilities: hold-back, struggle. Be creative about its day-to-day life. Do not use the word parrot or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, parrot-like, digital art, sugimori, chibi, centered, full body, silver galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-ce9c2f1c-b3ab-43f9-9288-4d61a5477f8c" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-ce9c2f1c-b3ab-43f9-9288-4d61a5477f8c.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-d1c0fc88-c915-49ae-b7a4-55ae1c4a9562">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-d1c0fc88-c915-49ae-b7a4-55ae1c4a9562.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi young legendary parrot normal-type wearing opal gemstones. It can be found in village-like environments. Do not use the words pokemon or normal. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Opalorn, a chibi young legendary parrot normal-type pokemon. It can be found in village-like environments It has the following abilities: thrash, power-shift. Be creative about its day-to-day life. Do not use the word parrot or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, parrot-like, digital art, sugimori, chibi, centered, full body, bright lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-d1c0fc88-c915-49ae-b7a4-55ae1c4a9562" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-d1c0fc88-c915-49ae-b7a4-55ae1c4a9562.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-34bd12e3-5c5b-4e4a-876e-5f02ee626c18">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-34bd12e3-5c5b-4e4a-876e-5f02ee626c18.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive strong hawk normal-type wearing prismatic armor. It can be found in grassland-like environments. Do not use the words pokemon or normal. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Spectris, a massive strong hawk normal-type pokemon. It can be found in grassland-like environments It has the following abilities: conversion, sketch. Be creative about its day-to-day life. Do not use the word hawk or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, hawk-like, digital art, sugimori, chibi, centered, full body, pastel colors</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-34bd12e3-5c5b-4e4a-876e-5f02ee626c18" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-34bd12e3-5c5b-4e4a-876e-5f02ee626c18.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-b9f1e328-e86d-4646-8875-ffa535dbf32f">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-b9f1e328-e86d-4646-8875-ffa535dbf32f.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a massive simple ibex normal-type wearing white gemstones. It can be found in field-like environments. Do not use the words pokemon or normal. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Brightox., a massive simple ibex normal-type pokemon. It can be found in field-like environments It has the following abilities: rapid-spin, endure. Be creative about its day-to-day life. Do not use the word ibex or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, ibex-like, digital art, sugimori, chibi, centered, full body, soft ambient light</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-b9f1e328-e86d-4646-8875-ffa535dbf32f" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-b9f1e328-e86d-4646-8875-ffa535dbf32f.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-3dc93af3-26f2-4c69-802a-7900e61d489a">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-3dc93af3-26f2-4c69-802a-7900e61d489a.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a young basic elephant normal-type wearing diamond armor. It can be found in village-like environments. Do not use the words pokemon or normal. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Armordillo, a young basic elephant normal-type pokemon. It can be found in village-like environments It has the following abilities: sharpen, extreme-evoboost. Be creative about its day-to-day life. Do not use the word elephant or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, elephant-like, digital art, sugimori, chibi, centered, full body, faded prismatic bokeh background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-3dc93af3-26f2-4c69-802a-7900e61d489a" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-3dc93af3-26f2-4c69-802a-7900e61d489a.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-09f5011c-2902-4470-904c-3bc68cee2220">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-09f5011c-2902-4470-904c-3bc68cee2220.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi young legendary wolf electric-type wearing ornate gemstones. It can be found in mountain-like environments. Do not use the words pokemon or electric. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Jemwolf., a chibi young legendary wolf electric-type pokemon. It can be found in mountain-like environments It has the following abilities: overdrive. Be creative about its day-to-day life. Do not use the word wolf or electric or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of electric-type pokemon, wolf-like, digital art, sugimori, chibi, centered, full body, lightning background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-09f5011c-2902-4470-904c-3bc68cee2220" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-09f5011c-2902-4470-904c-3bc68cee2220.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-d1bf8003-8fdb-4b4a-bace-2c48a063dce4">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-d1bf8003-8fdb-4b4a-bace-2c48a063dce4.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi young special wolf electric-type with white fur. It can be found in thunderstorm-like environments. Do not use the words pokemon or electric. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Thunderwolf, a chibi young special wolf electric-type pokemon. It can be found in thunderstorm-like environments It has the following abilities: ion-deluge. Be creative about its day-to-day life. Do not use the word wolf or electric or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of electric-type pokemon, wolf-like, digital art, sugimori, chibi, centered, full body, lightning background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-d1bf8003-8fdb-4b4a-bace-2c48a063dce4" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-d1bf8003-8fdb-4b4a-bace-2c48a063dce4.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-77cb4eb6-56d4-45b0-b156-39549fbeed33">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-77cb4eb6-56d4-45b0-b156-39549fbeed33.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi cute strong wolf water-type wearing a white crystal headband. It can be found in ocean-like environments. Do not use the words pokemon or water. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for AquaWolfe, a chibi cute strong wolf water-type pokemon. It can be found in ocean-like environments It has the following abilities: water-shuriken, shed-tail. Be creative about its day-to-day life. Do not use the word wolf or water or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of water-type pokemon, wolf-like, digital art, sugimori, chibi, centered, full body, sapphire blue galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-77cb4eb6-56d4-45b0-b156-39549fbeed33" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-77cb4eb6-56d4-45b0-b156-39549fbeed33.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-1c14f712-77f2-4db5-b6ba-fc47c960e476">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-1c14f712-77f2-4db5-b6ba-fc47c960e476.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a chibi young basic wolf fire-type wearing a dark crystal headband. It can be found in desert-like environments. Do not use the words pokemon or fire. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Pyrofox, a chibi young basic wolf fire-type pokemon. It can be found in desert-like environments It has the following abilities: ember. Be creative about its day-to-day life. Do not use the word wolf or fire or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fire-type pokemon, wolf-like, digital art, sugimori, chibi, centered, full body, orange galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-1c14f712-77f2-4db5-b6ba-fc47c960e476" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-1c14f712-77f2-4db5-b6ba-fc47c960e476.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-479339de-0104-4ddc-a48e-8774de19143e">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-479339de-0104-4ddc-a48e-8774de19143e.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi young legendary deer fire-type with ancient antlers. It can be found in desert-like environments. Do not use the words pokemon or fire. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Emberantler, a chibi young legendary deer fire-type pokemon. It can be found in desert-like environments It has the following abilities: eruption. Be creative about its day-to-day life. Do not use the word deer or fire or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fire-type pokemon, deer-like, digital art, sugimori, chibi, centered, full body, orange galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-479339de-0104-4ddc-a48e-8774de19143e" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-479339de-0104-4ddc-a48e-8774de19143e.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-4ee6ceaf-42f8-4820-b0e8-1e1e5d26e5ae">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-4ee6ceaf-42f8-4820-b0e8-1e1e5d26e5ae.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a dynamic basic monkey normal-type holding an shiny axe. It can be found in field-like environments. Do not use the words pokemon or normal. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Axeown, a dynamic basic monkey normal-type pokemon. It can be found in field-like environments It has the following abilities: rapid-spin, rapid-spin. Be creative about its day-to-day life. Do not use the word monkey or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, monkey-like, digital art, sugimori, chibi, centered, full body, soft ambient light</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-4ee6ceaf-42f8-4820-b0e8-1e1e5d26e5ae" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-4ee6ceaf-42f8-4820-b0e8-1e1e5d26e5ae.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-e84e53a8-5754-47ad-8b28-1758f1cb200e">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-e84e53a8-5754-47ad-8b28-1758f1cb200e.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a massive basic octopus water-type wearing regal armor. It can be found in ocean-like environments. Do not use the words pokemon or water. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Leviarmor, a massive basic octopus water-type pokemon. It can be found in ocean-like environments It has the following abilities: bubble, water-gun. Be creative about its day-to-day life. Do not use the word octopus or water or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of water-type pokemon, octopus-like, digital art, sugimori, chibi, centered, full body, sparkling blue background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-e84e53a8-5754-47ad-8b28-1758f1cb200e" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-e84e53a8-5754-47ad-8b28-1758f1cb200e.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-8bd5cc0a-2135-4c78-897b-9d9874ecc29a">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-8bd5cc0a-2135-4c78-897b-9d9874ecc29a.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive legendary cat electric-type with lightning-charged claws. It can be found in thunderstorm-like environments. Do not use the words pokemon or electric. Ony answer with the generated name:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Zappyclaws, a massive legendary cat electric-type pokemon. It can be found in thunderstorm-like environments It has the following abilities: catastropika. Be creative about its day-to-day life. Do not use the word cat or electric or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of electric-type pokemon, cat-like, digital art, sugimori, chibi, centered, full body, yellow and teal ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-8bd5cc0a-2135-4c78-897b-9d9874ecc29a" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-8bd5cc0a-2135-4c78-897b-9d9874ecc29a.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-52555bc5-9125-4e6c-a08c-cb42210242d9">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-52555bc5-9125-4e6c-a08c-cb42210242d9.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi young epic bison fire-type wearing a dark crystal headband. It can be found in desert-like environments. Do not use the words pokemon or fire. Ony answer with the generated name, nothing else:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Flamestone, a chibi young epic bison fire-type pokemon. It can be found in desert-like environments It has the following abilities: fire-spin. Be creative about its day-to-day life. Do not use the word bison or fire or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fire-type pokemon, bison-like, digital art, sugimori, chibi, centered, full body, blue and red ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-52555bc5-9125-4e6c-a08c-cb42210242d9" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-52555bc5-9125-4e6c-a08c-cb42210242d9.svg" alt="card"/>
+        </div>
+    </div>
+    <div id="open-modal-card-584c5297-25b0-49a3-b36c-21e1b7a5bf4b" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-584c5297-25b0-49a3-b36c-21e1b7a5bf4b.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-b54687a6-8dfc-4c95-a1f3-a9cefc6302a4">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-b54687a6-8dfc-4c95-a1f3-a9cefc6302a4.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a gigantic simple cat fighting-type with dark claws. It can be found in ruins-like environments. Do not use the words pokemon or fighting:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Ruinclaw, a gigantic simple cat fighting-type pokemon. It can be found in ruins-like environments It has the following abilities: vacuum-wave, camouflage. Be creative about its day-to-day life. Do not use the word cat or fighting or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fighting-type pokemon, cat-like, digital art, sugimori, chibi, centered, full body, orange ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-b54687a6-8dfc-4c95-a1f3-a9cefc6302a4" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-b54687a6-8dfc-4c95-a1f3-a9cefc6302a4.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-c05db761-6e08-4860-9e57-beb10617c232">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-c05db761-6e08-4860-9e57-beb10617c232.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a chibi cute epic squid water-type with a white crystal core. It can be found in river-like environments. Do not use the words pokemon or water:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Crystalquid, a chibi cute epic squid water-type pokemon. It can be found in river-like environments It has the following abilities: steam-eruption, fishious-rend. Be creative about its day-to-day life. Do not use the word squid or water or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of water-type pokemon, squid-like, digital art, sugimori, chibi, centered, full body, aurora background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-c05db761-6e08-4860-9e57-beb10617c232" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-c05db761-6e08-4860-9e57-beb10617c232.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-2ae795e8-5ea1-4072-9f8b-9e46c7a8464e">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-2ae795e8-5ea1-4072-9f8b-9e46c7a8464e.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a chibi young simple serpent dark-type with regal scales. It can be found in crypt-like environments. Do not use the words pokemon or dark:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Regalfang, a chibi young simple serpent dark-type pokemon. It can be found in crypt-like environments It has the following abilities: bite. Be creative about its day-to-day life. Do not use the word serpent or dark or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of dark-type pokemon, serpent-like, digital art, sugimori, chibi, centered, full body, dark galaxy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-2ae795e8-5ea1-4072-9f8b-9e46c7a8464e" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-2ae795e8-5ea1-4072-9f8b-9e46c7a8464e.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-5e29f381-f8f2-4b40-9c39-52760d823f85">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-5e29f381-f8f2-4b40-9c39-52760d823f85.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a gigantic mythical swan water-type with ornate feathers. It can be found in river-like environments. Do not use the words pokemon or water:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Plentiswan, a gigantic mythical swan water-type pokemon. It can be found in river-like environments It has the following abilities: aqua-cutter. Be creative about its day-to-day life. Do not use the word swan or water or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of water-type pokemon, swan-like, digital art, sugimori, chibi, centered, full body, sparkling blue background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-5e29f381-f8f2-4b40-9c39-52760d823f85" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-5e29f381-f8f2-4b40-9c39-52760d823f85.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-8d819b08-8681-4731-ab8f-8a6ff4d807d9">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-8d819b08-8681-4731-ab8f-8a6ff4d807d9.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive strong horse fire-type wearing red and white gemstones. It can be found in desert-like environments. Do not use the words pokemon or fire:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Gemtusk, a massive strong horse fire-type pokemon. It can be found in desert-like environments It has the following abilities: flame-burst. Be creative about its day-to-day life. Do not use the word horse or fire or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fire-type pokemon, horse-like, digital art, sugimori, chibi, centered, full body, lava texture background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-8d819b08-8681-4731-ab8f-8a6ff4d807d9" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-8d819b08-8681-4731-ab8f-8a6ff4d807d9.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-c96e29be-6b1f-45cf-8217-17079598180c">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-c96e29be-6b1f-45cf-8217-17079598180c.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a gigantic basic goat fire-type wearing white armor. It can be found in volcano-like environments. Do not use the words pokemon or fire:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Blaziti, a gigantic basic goat fire-type pokemon. It can be found in volcano-like environments It has the following abilities: flame-wheel. Be creative about its day-to-day life. Do not use the word goat or fire or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of fire-type pokemon, goat-like, digital art, sugimori, chibi, centered, full body, blue and red ambient lighting</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-c96e29be-6b1f-45cf-8217-17079598180c" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-c96e29be-6b1f-45cf-8217-17079598180c.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-2a9a75f8-6209-4e64-8ddb-72776ca06f60">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-2a9a75f8-6209-4e64-8ddb-72776ca06f60.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, short, single-word pokemon name for a chibi young basic owl normal-type wearing shiny bracers. It can be found in grassland-like environments. Do not use the words pokemon or normal:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Thoracic, a chibi young basic owl normal-type pokemon. It can be found in grassland-like environments It has the following abilities: foresight, uproar. Be creative about its day-to-day life. Do not use the word owl or normal or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of normal-type pokemon, owl-like, digital art, sugimori, chibi, centered, full body, faded prismatic bokeh background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-2a9a75f8-6209-4e64-8ddb-72776ca06f60" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-2a9a75f8-6209-4e64-8ddb-72776ca06f60.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-e0a3630c-3a16-4f3d-8518-7b71be63b4b5">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-e0a3630c-3a16-4f3d-8518-7b71be63b4b5.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a massive rare monkey psychic-type holding an golden axe. It can be found in castle-like environments. Do not use the words pokemon or psychic:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Aureaxon, a massive rare monkey psychic-type pokemon. It can be found in castle-like environments It has the following abilities: dream-eater, prismatic-laser. Be creative about its day-to-day life. Do not use the word monkey or psychic or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of psychic-type pokemon, monkey-like, digital art, sugimori, chibi, centered, full body, dreamy background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-e0a3630c-3a16-4f3d-8518-7b71be63b4b5" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-e0a3630c-3a16-4f3d-8518-7b71be63b4b5.svg" alt="card"/>
+        </div>
+    </div>
+    <a href="#open-modal-card-ec94953d-8168-4b66-986c-cf5039e0401a">
+        <div class="card">
+            <div class="visual">
+                <img src="cards/card-ec94953d-8168-4b66-986c-cf5039e0401a.svg" alt="card"/>
+            </div>
+            <div class="metadata">
+                <h3>Used Prompts</h3>
+                <div>
+                    <label>Name: </label><code>Generate a unique, original, creative, single-word pokemon name for a young rare serpent water-type wearing a regal mask. It can be found in ocean-like environments. Do not use the words pokemon or water:</code>
+                </div>
+                <div>
+                    <label>Description: </label><code>Generate a short, original, creative Pokedex description for Regalmaskerpent, a young rare serpent water-type pokemon. It can be found in ocean-like environments It has the following abilities: water-shuriken, water-sport. Be creative about its day-to-day life. Do not use the word serpent or water or the ability names. Use a maximum of 50 characters:</code>
+                </div>
+                <div>
+                    <label>Visual: </label><code>mdjrny-v4 style portrait of water-type pokemon, serpent-like, digital art, sugimori, chibi, centered, full body, gleaming bubble background</code>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div id="open-modal-card-ec94953d-8168-4b66-986c-cf5039e0401a" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="cards/card-ec94953d-8168-4b66-986c-cf5039e0401a.svg" alt="card"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

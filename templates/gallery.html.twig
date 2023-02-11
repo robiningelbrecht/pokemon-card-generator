@@ -28,13 +28,19 @@
         }
 
         .card{
-            width: 800px;
+            width: 95%;
             padding: 2em;
             border-radius: 1rem;
             display: flex;
             align-items: center;
             column-gap: 20px;
             background: #eee;
+        }
+
+        @media (min-width: 800px) {
+            .card{
+                width: 800px;
+            }
         }
 
         .card h3 {
