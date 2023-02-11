@@ -92,7 +92,7 @@ by navigating to the card gallery page: `http://localhost:8080/`.
 -r, --rarity[=RARITY]                  The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are common, uncommon, rare
 -s, --size[=SIZE]                      The size of the Pokémon you want to generate, omit to use a random one. Valid options are xl, l, m, s, xs
 -c, --creature[=CREATURE]              The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one
--num, --numberOfCards[=NUMBEROFCARDS]  The number of cards to generate. Number between 1 and 10 [default: 1]
+-x, --numberOfCards[=NUMBEROFCARDS]    The number of cards to generate. Number between 1 and 10 [default: 1]
 -h, --help                             Display help for the given command. When no command is given display help for the list command
 ```
 

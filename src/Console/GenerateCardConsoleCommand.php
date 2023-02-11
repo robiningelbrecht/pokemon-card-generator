@@ -41,7 +41,7 @@ class GenerateCardConsoleCommand extends Command
             ->addOption('rarity', 'r', InputOption::VALUE_OPTIONAL, 'The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonRarity $rarity) => $rarity->value, PokemonRarity::cases())))
             ->addOption('size', 's', InputOption::VALUE_OPTIONAL, 'The size of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonSize $size) => $size->value, PokemonSize::cases())))
             ->addOption('creature', 'c', InputOption::VALUE_OPTIONAL, 'The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one')
-            ->addOption('numberOfCards', 'num', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. Number between 1 and 10', 1);
+            ->addOption('numberOfCards', 'x', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. Number between 1 and 10', 1);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
