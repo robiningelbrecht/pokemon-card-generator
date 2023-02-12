@@ -14,9 +14,16 @@
     padding: 1em;
     border-radius: 1rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     column-gap: 20px;
     background: var(--ifm-color-secondary-light);
+}
+
+@media (min-width: 650px) {
+    .card{
+        flex-direction: row;
+    }
 }
 
 html[data-theme=dark] .card {
