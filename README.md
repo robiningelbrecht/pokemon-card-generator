@@ -83,7 +83,7 @@ Your CLI should output something along the lines of
 You'll be able to view your card and all information used to generate it, 
 by navigating to the card gallery page: `http://localhost:8080/`.
 
-<img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/example.png" alt="Example">
+<img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/example-generated-card.png" alt="Example">
 
 ### CLI command options
 
