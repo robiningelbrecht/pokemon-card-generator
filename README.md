@@ -32,11 +32,11 @@ although I came up with a slightly different approach.
 ## Installation
 
 ```bash
-git clone git@github.com:robiningelbrecht/pokemon-card-generator.git
+> git clone git@github.com:robiningelbrecht/pokemon-card-generator.git
 # Build docker containers
-docker-compose up -d --build
+> docker-compose up -d --build
 # Install dependencies
-docker-compose run --rm php-cli composer install
+> docker-compose run --rm php-cli composer install
 ```
 
 ## Configuration
@@ -73,7 +73,7 @@ REPLICATE_API_KEY=your-replicate-api-key
 At this point, you should be locked and loaded to generate your first Pokémon card by running
 
 ```bash
-docker-compose run --rm php-cli bin/console app:card:generate
+> docker-compose run --rm php-cli bin/console app:card:generate
 ```
 
 Your CLI should output something along the lines of
