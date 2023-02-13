@@ -1,12 +1,10 @@
 {
-  "name": "robiningelbrecht/php-slim-skeleton",
+  "name": "robiningelbrecht/pokemon-card-generator",
   "keywords": [
-    "Slim",
-    "Framework",
-    "Skeleton",
-    "DDD",
-    "AMQP",
-    "CQRS"
+    "AI",
+    "GPT",
+    "Stable Diffusion",
+    "Pokémon"
   ],
   "license": "MIT",
   "authors": [
