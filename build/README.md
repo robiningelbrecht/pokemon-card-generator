@@ -1,0 +1,1 @@
+This directory contains the build of the example gallery.
