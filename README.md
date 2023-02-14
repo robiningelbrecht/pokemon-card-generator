@@ -25,9 +25,11 @@ although I came up with a slightly different approach.
 | Generate multiple cards at once                 |         ✅        |      ✅      |
 | Generate cards of a specific element            |         ✅        |      ✅      |
 | Generate cards of a specific creature           |         ✅        |      ✅      |
-| Generate a series that evolve from one another  |         ❌        |      ✅      |
+| Generate a series that evolve from one another* |         ❌        |      ✅      |
 | Fully generate a card with one command          |         ✅        |      ❌      |
 | Gallery with overview of generated cards        |         ✅        |      ❌      |
+
+<sub>* Planning on adding this feature</sub>
 
 ## Installation
 
