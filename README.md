@@ -1,4 +1,4 @@
-<h1 align="center">Pokemon card AI generator</h1>
+<h1 align="center">AI Pokemon card generator</h1>
 
 <p align="center">
   <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/banner.png" alt="Banner">
