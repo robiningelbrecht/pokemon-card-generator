@@ -2,6 +2,8 @@
 
 namespace App\Domain\Card;
 
+use App\Domain\Pokemon\PokemonRarity;
+
 enum CardType: string
 {
     case DARK = 'dark';
@@ -28,65 +30,65 @@ enum CardType: string
         };
     }
 
-    public function getAmbience(): array
+    public function getAmbience(PokemonRarity $rarity): array
     {
         return match ($this) {
-            CardType::NORMAL => [
+            CardType::NORMAL => array_filter([
                 'pastel colors',
                 'bright lighting',
                 'soft ambient light',
                 'faded prismatic bokeh background',
-                'silver galaxy background',
-            ],
-            CardType::FIRE => [
+                PokemonRarity::RARE === $rarity ? 'silver galaxy background' : null,
+            ]),
+            CardType::FIRE => array_filter([
                 'red and purple ambient lighting',
                 'blue and red ambient lighting',
                 'lava texture background',
-                'orange galaxy background',
-            ],
-            CardType::WATER => [
+                PokemonRarity::RARE === $rarity ? 'orange galaxy background' : null,
+            ]),
+            CardType::WATER => array_filter([
                 'teal and blue ambient lighting',
                 'aurora background',
                 'sparkling blue background',
                 'gleaming bubble background',
-                'sapphire blue galaxy background',
-            ],
-            CardType::GRASS => [
+                PokemonRarity::RARE === $rarity ? 'sapphire blue galaxy background' : null,
+            ]),
+            CardType::GRASS => array_filter([
                 'green and orange ambient lighting',
                 'green and teal ambient lighting',
                 'emerald bokeh lighting',
                 'sunlight ray ambience',
-                'emerald galaxy background',
-            ],
-            CardType::ELECTRIC => [
+                PokemonRarity::RARE === $rarity ? 'emerald galaxy background' : null,
+            ]),
+            CardType::ELECTRIC => array_filter([
                 'yellow and teal ambient lighting',
                 'lightning background',
-                'orange galaxy background',
-            ],
-            CardType::PSYCHIC => [
+                PokemonRarity::RARE === $rarity ? 'orange galaxy background' : null,
+            ]),
+            CardType::PSYCHIC => array_filter([
                 'pink bokeh lighting',
                 'violet shadows',
                 'dreamy background',
-                'galaxy background',
-            ],
-            CardType::FIGHTING => [
+                PokemonRarity::RARE === $rarity ? 'galaxy background' : null,
+            ]),
+            CardType::FIGHTING => array_filter([
                 'orange ambient lighting',
                 'red and purple ambient lighting',
                 'orange and blue ambient lighting',
-                'galaxy background',
-            ],
-            CardType::STEEL => [
+                PokemonRarity::RARE === $rarity ? 'galaxy background' : null,
+            ]),
+            CardType::STEEL => array_filter([
                 'metallic ambient lighting',
                 'grey ambient lighting',
                 'grey shadows',
-                'grey galaxy background',
-            ],
-            CardType::DARK => [
+                PokemonRarity::RARE === $rarity ? 'grey galaxy background' : null,
+            ]),
+            CardType::DARK => array_filter([
                 'pink bokeh lighting',
                 'violet shadows',
                 'dreamy background',
-                'dark galaxy background',
-            ],
+                PokemonRarity::RARE === $rarity ? 'dark galaxy background' : null,
+            ]),
         };
     }
 

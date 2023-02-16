@@ -11,8 +11,8 @@ enum PokemonRarity: string
     public function getRetreatCost(): int
     {
         return match ($this) {
-            self::UNCOMMON => 1,
-            self::COMMON => 2,
+            self::COMMON => 1,
+            self::UNCOMMON => 2,
             self::RARE => 3,
         };
     }
@@ -20,8 +20,8 @@ enum PokemonRarity: string
     public function getBonus(): int
     {
         return match ($this) {
-            self::UNCOMMON => 1,
-            self::COMMON => 2,
+            self::COMMON => 1,
+            self::UNCOMMON => 2,
             self::RARE => 3,
         };
     }
@@ -29,8 +29,8 @@ enum PokemonRarity: string
     public function getMinAllowedPpForMove(): int
     {
         return match ($this) {
-            self::UNCOMMON => 25,
-            self::COMMON => 15,
+            self::COMMON => 25,
+            self::UNCOMMON => 15,
             self::RARE => -1,
         };
     }
@@ -38,8 +38,8 @@ enum PokemonRarity: string
     public function getAdjectives(): array
     {
         return match ($this) {
-            self::UNCOMMON => ['simple', 'basic'],
-            self::COMMON => ['strong', 'rare', 'special'],
+            self::COMMON => ['simple', 'basic'],
+            self::UNCOMMON => ['strong', 'rare', 'special'],
             self::RARE => ['legendary', 'epic', 'mythical'],
         };
     }

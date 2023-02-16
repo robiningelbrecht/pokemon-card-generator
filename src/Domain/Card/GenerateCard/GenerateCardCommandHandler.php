@@ -68,12 +68,12 @@ class GenerateCardCommandHandler implements CommandHandler
 
         $countVisualChecks = 0;
         do {
-            if ($countVisualChecks > 5) {
-                // Image should've been generated a long time ago, something has gone wrong.
+            if ($countVisualChecks > 30) {
+                // Image should've been generated, something has gone wrong.
                 throw new \RuntimeException('Could not generate a visual, API call took too long to finish');
             }
             // Generating image might take some time.
-            sleep(7);
+            sleep(6);
             $uriToGeneratedVisual = $this->replicate->getPrediction($prediction['id'])['output'][0] ?? null;
             ++$countVisualChecks;
         } while (!$uriToGeneratedVisual);

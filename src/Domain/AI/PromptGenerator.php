@@ -17,7 +17,8 @@ class PromptGenerator
         private readonly CardType $cardType,
         private readonly PokemonRarity $pokemonRarity,
         private readonly Name $subject,
-        private readonly array $subjectAdjectives,
+        private readonly string $sizeAdjective,
+        private readonly string $rarityAdjective,
         private readonly Description $detail,
         private readonly Environment $environment,
         private readonly string $ambience,
@@ -61,6 +62,7 @@ class PromptGenerator
         $segments = [
             'mdjrny-v4 style portrait of '.$this->cardType->value.'-type pokemon',
             $this->subject.'-like',
+            $this->rarityAdjective,
             'digital art',
             'sugimori',
             'chibi',
@@ -76,7 +78,8 @@ class PromptGenerator
     {
         return [
             'a',
-            ...$this->subjectAdjectives,
+            $this->sizeAdjective,
+            $this->rarityAdjective,
             $this->subject,
             $this->cardType->value.'-type',
         ];
@@ -89,7 +92,7 @@ class PromptGenerator
         Creature $creature
     ): self {
         $environments = $cardType->getEnvironments();
-        $ambience = $cardType->getAmbience();
+        $ambience = $cardType->getAmbience($pokemonRarity);
         $sizeAdjectives = $pokemonSize->getAdjectives();
         $rarityAdjectives = $pokemonRarity->getAdjectives();
 
@@ -97,10 +100,8 @@ class PromptGenerator
             $cardType,
             $pokemonRarity,
             $creature->getName(),
-            [
-                $sizeAdjectives[array_rand($sizeAdjectives)],
-                $rarityAdjectives[array_rand($rarityAdjectives)],
-            ],
+            $sizeAdjectives[array_rand($sizeAdjectives)],
+            $rarityAdjectives[array_rand($rarityAdjectives)],
             $creature->getRandomDescriptionForCardType($cardType),
             $environments[array_rand($environments)],
             $ambience[array_rand($ambience)],

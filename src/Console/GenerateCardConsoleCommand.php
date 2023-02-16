@@ -41,7 +41,8 @@ class GenerateCardConsoleCommand extends Command
             ->addOption('rarity', 'r', InputOption::VALUE_OPTIONAL, 'The rarity of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonRarity $rarity) => $rarity->value, PokemonRarity::cases())))
             ->addOption('size', 's', InputOption::VALUE_OPTIONAL, 'The size of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonSize $size) => $size->value, PokemonSize::cases())))
             ->addOption('creature', 'c', InputOption::VALUE_OPTIONAL, 'The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one')
-            ->addOption('numberOfCards', 'x', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. Number between 1 and 10', 1);
+            ->addOption('evolutionSeries', 'e', InputOption::VALUE_NONE, 'Indicates if you want to generate a series that evolve from one another. Options "size", "rarity" and "numberOfCards" will be ignored')
+            ->addOption('numberOfCards', 'x', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. A number between 1 and 10', 1);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -50,21 +51,45 @@ class GenerateCardConsoleCommand extends Command
             $cardTypes = CardType::cases();
             $rarities = PokemonRarity::cases();
             $sizes = PokemonSize::cases();
-            $numberOfCardsToGenerate = $input->getOption('numberOfCards');
+            $generateEvolutionSeries = $input->getOption('evolutionSeries');
+            $numberOfCardsToGenerate = $generateEvolutionSeries ? (mt_rand(0, 100) < 75 ? 3 : 2) : $input->getOption('numberOfCards');
 
             if ($numberOfCardsToGenerate < 1 || $numberOfCardsToGenerate > 10) {
                 throw new \RuntimeException('numberOfCards must be a valid number between 1 and 10');
             }
 
+            $cardType = $input->getOption('cardType') ? CardType::from($input->getOption('cardType')) : $cardTypes[array_rand($cardTypes)];
+            $creature = $input->getOption('creature') ? CreaturePool::matchBySubject(Name::fromString($input->getOption('creature'))) : CreaturePool::randomByCardType($cardType);
+
             for ($i = 0; $i < $numberOfCardsToGenerate; ++$i) {
-                $cardType = $input->getOption('cardType') ? CardType::from($input->getOption('cardType')) : $cardTypes[array_rand($cardTypes)];
-                $rarity = $input->getOption('rarity') ? PokemonRarity::from($input->getOption('rarity')) : $rarities[array_rand($rarities)];
-                $size = $input->getOption('size') ? PokemonSize::from($input->getOption('size')) : $sizes[array_rand($sizes)];
-                $creature = $input->getOption('creature') ? CreaturePool::matchBySubject(Name::fromString($input->getOption('creature'))) : CreaturePool::randomByCardType($cardType);
+                if (!$generateEvolutionSeries) {
+                    $cardType = $input->getOption('cardType') ? CardType::from($input->getOption('cardType')) : $cardTypes[array_rand($cardTypes)];
+                    $creature = $input->getOption('creature') ? CreaturePool::matchBySubject(Name::fromString($input->getOption('creature'))) : CreaturePool::randomByCardType($cardType);
+                    $rarity = $input->getOption('rarity') ? PokemonRarity::from($input->getOption('rarity')) : $rarities[array_rand($rarities)];
+                    $size = $input->getOption('size') ? PokemonSize::from($input->getOption('size')) : $sizes[array_rand($sizes)];
+                }
+                if ($generateEvolutionSeries) {
+                    if (0 === $i) {
+                        $rarity = PokemonRarity::COMMON;
+                        $size = PokemonSize::S;
+                    }
+                    if (1 === $i && 2 === $numberOfCardsToGenerate) {
+                        $rarity = PokemonRarity::RARE;
+                        $size = PokemonSize::L;
+                    }
+                    if (1 === $i && 3 === $numberOfCardsToGenerate) {
+                        $rarity = PokemonRarity::UNCOMMON;
+                        $size = PokemonSize::M;
+                    }
+                    if (2 === $i) {
+                        $rarity = PokemonRarity::RARE;
+                        $size = PokemonSize::XL;
+                    }
+                }
 
                 $table = new Table($output);
                 $table
-                    ->setHeaders([[new TableCell('Generating a Pokémon card with following options. This might take a few seconds...', ['colspan' => 2])]])
+                    ->setHeaders([[new TableCell('Generating a Pokémon card with following options. This might take up to 3 minutes...', ['colspan' => 2])]])
                     ->setRows([
                         ['Card type', sprintf('<fg=%s>●</> %s', $cardType->getColor(), ucfirst($cardType->value))],
                         ['Pokémon rarity', ucfirst($rarity->value)],
