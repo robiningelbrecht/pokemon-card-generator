@@ -37,6 +37,9 @@ return [
         'auto_cache' => false,
         'timeout' => false,
     ])),
+    \App\Domain\Image\ImageGeneratorFactory::class => DI\autowire()
+        ->method('subscribeImageGenerator', \App\Domain\Image\FileType::SVG, DI\get(\App\Domain\Image\SvgGenerator::class))
+        ->method('subscribeImageGenerator', \App\Domain\Image\FileType::PNG, DI\get(\App\Domain\Image\PngGenerator::class)),
     ReplicateApiKey::class => fn () => ReplicateApiKey::fromString($_ENV['REPLICATE_API_KEY']),
     Client::class => fn () => OpenAI::client($_ENV['OPEN_AI_API_KEY']),
     // Clock.

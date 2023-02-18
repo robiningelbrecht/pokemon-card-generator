@@ -34,6 +34,9 @@ class PokemonMove
         return str_replace('$effect_chance', $this->data['effect_chance'] ?? '', $effect);
     }
 
+    /**
+     * @return PokemonElement[]
+     */
     public function getCost(): array
     {
         $element = PokemonElement::from($this->data['type']['name']);

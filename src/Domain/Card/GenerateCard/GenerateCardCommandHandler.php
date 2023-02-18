@@ -9,6 +9,7 @@ use App\Domain\Card\Card;
 use App\Domain\Card\CardRandomizer;
 use App\Domain\Card\CardRepository;
 use App\Domain\Card\CardType;
+use App\Domain\Image\ImageGeneratorFactory;
 use App\Domain\Pokemon\Move\PokemonMoveRepository;
 use App\Domain\Pokemon\Type\PokemonTypeRepository;
 use App\Infrastructure\Attribute\AsCommandHandler;
@@ -16,9 +17,7 @@ use App\Infrastructure\CQRS\CommandHandler\CommandHandler;
 use App\Infrastructure\CQRS\DomainCommand;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
-use App\Infrastructure\ValueObject\String\Svg;
 use Lcobucci\Clock\Clock;
-use Twig\Environment;
 
 #[AsCommandHandler]
 class GenerateCardCommandHandler implements CommandHandler
@@ -28,10 +27,10 @@ class GenerateCardCommandHandler implements CommandHandler
         private readonly PokemonMoveRepository $pokemonMoveRepository,
         private readonly CardRandomizer $cardRandomizer,
         private readonly CardRepository $cardRepository,
-        private readonly Environment $twig,
         private readonly OpenAI $openAI,
         private readonly Replicate $replicate,
         private readonly Clock $clock,
+        private readonly ImageGeneratorFactory $imageGeneratorFactory,
     ) {
     }
 
@@ -43,11 +42,15 @@ class GenerateCardCommandHandler implements CommandHandler
         $normalType = $this->pokemonTypeRepository->findOneByCardType(CardType::NORMAL);
         $moves = $this->pokemonMoveRepository->findByTypeAndRarity($type, $command->getPokemonRarity());
 
-        $selectedMoves = [$moves[array_rand($moves)]];
+        $firstMove = $moves[array_rand($moves)];
+        $selectedMoves = [$firstMove];
         $numberOfMoves = mt_rand(1, 2);
         if (2 === $numberOfMoves) {
             $moves = $this->pokemonMoveRepository->findByTypeAndRarity(mt_rand(0, 1) ? $normalType : $type);
-            $selectedMoves[] = $moves[array_rand($moves)];
+            do {
+                $secondMove = $moves[array_rand($moves)];
+            } while ($firstMove->getName() === $secondMove->getName());
+            $selectedMoves[] = $secondMove;
         }
 
         $promptGenerator = PromptGenerator::createFor(
@@ -58,7 +61,7 @@ class GenerateCardCommandHandler implements CommandHandler
         );
 
         $promptForPokemonName = $promptGenerator->forPokemonName();
-        $name = Name::fromString(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'));
+        $name = Name::fromString(ucfirst(strtolower(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'))));
 
         $promptForPokemonDescription = $promptGenerator->forPokemonDescription($name, $selectedMoves);
         $description = Description::fromStringWithMaxChars($this->openAI->createCompletion($promptForPokemonDescription), 145);
@@ -78,32 +81,29 @@ class GenerateCardCommandHandler implements CommandHandler
             ++$countVisualChecks;
         } while (!$uriToGeneratedVisual);
 
-        $template = $this->twig->load('card.html.twig');
-        $svg = $template->render([
-            'name' => $name,
-            'hp' => $this->cardRandomizer->randomizeHpByRarity($command->getPokemonRarity()),
-            'visual' => $uriToGeneratedVisual,
-            'element' => $type->getElement()->value,
-            'weakness' => $type->getWeaknessFor(),
-            'resistance' => $type->getResistantFor(),
-            'retreatCost' => $command->getPokemonRarity()->getRetreatCost(),
-            'height' => $this->cardRandomizer->randomizeHeightBySize($command->getPokemonSize()),
-            'weight' => $this->cardRandomizer->randomizeWeightBySize($command->getPokemonSize()),
-            'description' => $description,
-            'moves' => $selectedMoves,
-        ]);
-
         $this->cardRepository->save(
             Card::create(
                 $command->getCardId(),
+                $command->getCardType(),
                 $promptForPokemonName,
                 $promptForPokemonDescription,
                 $promptForPokemonVisual,
                 $name,
                 $description,
+                $command->getFileType(),
                 $this->clock->now()
             ),
-            Svg::fromString($svg),
+            $this->imageGeneratorFactory->getForFileType($command->getFileType())->make(
+                $name,
+                $type,
+                $command->getPokemonRarity(),
+                $description,
+                $uriToGeneratedVisual,
+                $this->cardRandomizer->randomizeHpByRarity($command->getPokemonRarity()),
+                $selectedMoves,
+                $this->cardRandomizer->randomizeHeightBySize($command->getPokemonSize()),
+                $this->cardRandomizer->randomizeWeightBySize($command->getPokemonSize())
+            ),
         );
     }
 }
