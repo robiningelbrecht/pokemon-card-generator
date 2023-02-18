@@ -98,6 +98,8 @@ by navigating to the card gallery page: `http://localhost:8080/`.
 -h, --help            Display help for the given command. When no command is given display help for the list command
 ```
 
+<sub>The PNG slightly differs from the SVG because the latter allows for more flexibility while generating the image<sub>
+
 ## Examples
 
 There's an example gallery available on https://pokemon-card-generator.robiningelbrecht.be/
