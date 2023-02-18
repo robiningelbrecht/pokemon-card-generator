@@ -67,12 +67,12 @@ class CreaturePool
                 CreatureAttribute::withSkin(),
                 ...CreatureAttribute::allWearables()
             ),
-            Creature::fromNameAndAttributes(
+            /*Creature::fromNameAndAttributes(
                 Name::fromString('tiger'),
                 CreatureAttribute::withClaws(),
                 CreatureAttribute::withFur(),
                 ...CreatureAttribute::allWearables()
-            ),
+            ),*/
             Creature::fromNameAndAttributes(
                 Name::fromString('lynx'),
                 CreatureAttribute::withClaws(),

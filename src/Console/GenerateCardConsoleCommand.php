@@ -7,6 +7,7 @@ use App\Domain\Card\CardRepository;
 use App\Domain\Card\CardType;
 use App\Domain\Card\Creature\CreaturePool;
 use App\Domain\Card\GenerateCard\GenerateCard;
+use App\Domain\Image\FileType;
 use App\Domain\Pokemon\PokemonRarity;
 use App\Domain\Pokemon\PokemonSize;
 use App\Infrastructure\CQRS\CommandBus;
@@ -42,7 +43,8 @@ class GenerateCardConsoleCommand extends Command
             ->addOption('size', 's', InputOption::VALUE_OPTIONAL, 'The size of the Pokémon you want to generate, omit to use a random one. Valid options are '.implode(', ', array_map(fn (PokemonSize $size) => $size->value, PokemonSize::cases())))
             ->addOption('creature', 'c', InputOption::VALUE_OPTIONAL, 'The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one')
             ->addOption('evolutionSeries', 'e', InputOption::VALUE_NONE, 'Indicates if you want to generate a series that evolve from one another. Options "size", "rarity" and "numberOfCards" will be ignored')
-            ->addOption('numberOfCards', 'x', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. A number between 1 and 10', 1);
+            ->addOption('numberOfCards', 'x', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. A number between 1 and 10', 1)
+            ->addOption('fileType', 'f', InputOption::VALUE_OPTIONAL, 'The image file type you want to use. Valid options are '.implode(', ', array_map(fn (FileType $fileType) => $fileType->value, FileType::cases())), FileType::PNG->value);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -51,6 +53,7 @@ class GenerateCardConsoleCommand extends Command
             $cardTypes = CardType::cases();
             $rarities = PokemonRarity::cases();
             $sizes = PokemonSize::cases();
+            $fileType = FileType::from($input->getOption('fileType'));
             $generateEvolutionSeries = $input->getOption('evolutionSeries');
             $numberOfCardsToGenerate = $generateEvolutionSeries ? (mt_rand(0, 100) < 75 ? 3 : 2) : $input->getOption('numberOfCards');
 
@@ -94,7 +97,8 @@ class GenerateCardConsoleCommand extends Command
                         ['Card type', sprintf('<fg=%s>●</> %s', $cardType->getColor(), ucfirst($cardType->value))],
                         ['Pokémon rarity', ucfirst($rarity->value)],
                         ['Pokémon size', strtoupper($size->value)],
-                        ['Creature', $creature->getName()],
+                        ['Creature', ucfirst($creature->getName())],
+                        ['File type', $fileType->value],
                     ])
                     ->render();
 
@@ -105,6 +109,7 @@ class GenerateCardConsoleCommand extends Command
                     $rarity,
                     $size,
                     $creature,
+                    $fileType,
                 ));
 
                 $card = $this->cardRepository->find($cardId);
@@ -128,7 +133,7 @@ class GenerateCardConsoleCommand extends Command
                     ->addRow(new TableSeparator())
                     ->addRow(['Name', $card->getGeneratedName()."\n"])
                     ->addRow(['Description', $card->getGeneratedDescription()."\n"])
-                    ->addRow(['Card', sprintf('http://localhost:8080/cards/%s.svg', $cardId)])
+                    ->addRow(['Card', sprintf('http://localhost:8080/cards/%s.%s', $cardId, $card->getFileType()->value)])
                     ->render();
             }
         } catch (\Throwable $e) {

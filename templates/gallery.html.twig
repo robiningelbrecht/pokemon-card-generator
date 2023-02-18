@@ -49,6 +49,12 @@
                     <div class="row">
                         <div class="col docItemCol">
                             <div class="gallery">
+                                {% if not cards %}
+                                <div class="card" style="display: block;text-align: center;">
+                                    <h3>Generate your first card by executing</h3>
+                                    <code>docker-compose run --rm php-cli bin/console app:card:generate</code>
+                                </div>
+                                {% endif %}
                                 {% for card in cards %}
                                     <div class="card">
                                         <a href="#open-modal-{{ card.getCardId() }}">
