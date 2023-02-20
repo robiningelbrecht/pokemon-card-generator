@@ -6,6 +6,7 @@
     <title>Pokemon card AI generator</title>
     <link rel="stylesheet" href="/gallery.css">
     <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
 </head>
 <body>
 <div class="docusaurus">
@@ -59,7 +60,7 @@
                                     <div class="card">
                                         <a href="#open-modal-{{ card.getCardId() }}">
                                             <div class="visual">
-                                                <img src="{{ card.getUri() }}" alt="card"/>
+                                                <img  class="lazy" src="placeholders/{{ card.getCardType().value }}.png" data-src="{{ card.getUri() }}" alt="{{ card.getGeneratedName() }}"/>
                                             </div>
                                         </a>
                                         <div class="metadata">
@@ -78,7 +79,7 @@
                                     <div id="open-modal-{{ card.getCardId() }}" class="modal-window">
                                         <div>
                                             <a href="#" title="Close" class="modal-close">X</a>
-                                            <img src="{{ card.getUri() }}" alt="card"/>
+                                            <img  class="lazy" src="placeholders/{{ card.getCardType().value }}.png" data-src="{{ card.getUri() }}" alt="{{ card.getGeneratedName() }}"/>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -101,6 +102,9 @@
         localStorage.setItem('theme', currentTheme);
     }
     toggleSwitch.addEventListener('click', switchTheme, false);
+    new LazyLoad({
+        thresholds: "100px",
+    });
 </script>
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
         data-id="ingelbrecht" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF"
