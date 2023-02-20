@@ -106,6 +106,11 @@ There's an example gallery available on https://pokemon-card-generator.robininge
 
 <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gallery-example.png" alt="Gallery">
 
+## Gotta generate 'em all
+
+Be sure to also check https://gotta-generate-em-all.robiningelbrecht.be/. 
+It generates and publishes a new card every day 🥳
+
 ## Acknowledgements
 
 Thanks to [TheDuckTamerBlanks](https://www.deviantart.com/katarawaterbender) for the blank card templates.
