@@ -155,10 +155,10 @@ class PngGenerator implements ImageGenerator
         });
         $moveCanvas->insert($damageCanvas, 'right');
 
-        $moveNameCanvas = $this->imageManager->canvas($move->getPower() >= 100 ? 260 : 266, 50);
+        $moveNameCanvas = $this->imageManager->canvas(260, 50);
         $valign = $move->getDescription() ? 'top' : 'middle';
         $y = $move->getDescription() ? 10 : 25;
-        $moveNameCanvas->text($move->getLabel(), $moveNameCanvas->getWidth() / 2, $y, function (Font $font) use ($fontColor, $valign) {
+        $moveNameCanvas->text($move->getLabel(), 130, $y, function (Font $font) use ($fontColor, $valign) {
             $font->file(self::fontBold());
             $font->size(16);
             $font->color($fontColor);
@@ -167,7 +167,7 @@ class PngGenerator implements ImageGenerator
         });
 
         if ($move->getDescription()) {
-            $descriptionMaxLength = $move->getPower() >= 100 ? 50 : 54;
+            $descriptionMaxLength = 50;
             $description = trim(preg_replace('/\s+/', ' ', $move->getDescription()));
             $description = strlen($description) > $descriptionMaxLength ? trim(substr($description, 0, $descriptionMaxLength - 3)).'...' : $description;
 
