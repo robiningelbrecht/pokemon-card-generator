@@ -122,7 +122,7 @@ class PngGenerator implements ImageGenerator
                 $font->align('center');
             });
         }
-        $png->insert($canvas, 'top-left', 46, 589);
+        $png->insert($canvas, 'top-left', 46, 590);
 
         return Png::fromInterventionImage($png);
     }
@@ -146,10 +146,19 @@ class PngGenerator implements ImageGenerator
         }
         $moveCanvas->insert($elementsCanvas, 'left');
 
-        $moveNameCanvas = $this->imageManager->canvas(260, 50);
+        $damageCanvas = $this->imageManager->canvas(46, 30);
+        $damageCanvas->text($move->getPower(), 23, 24, function (Font $font) use ($fontColor) {
+            $font->file(self::fontRegular());
+            $font->size(24);
+            $font->color($fontColor);
+            $font->align('center');
+        });
+        $moveCanvas->insert($damageCanvas, 'right');
+
+        $moveNameCanvas = $this->imageManager->canvas($move->getPower() >= 100 ? 260 : 266, 50);
         $valign = $move->getDescription() ? 'top' : 'middle';
         $y = $move->getDescription() ? 10 : 25;
-        $moveNameCanvas->text($move->getLabel(), 130, $y, function (Font $font) use ($fontColor, $valign) {
+        $moveNameCanvas->text($move->getLabel(), $moveNameCanvas->getWidth() / 2, $y, function (Font $font) use ($fontColor, $valign) {
             $font->file(self::fontBold());
             $font->size(16);
             $font->color($fontColor);
@@ -158,28 +167,18 @@ class PngGenerator implements ImageGenerator
         });
 
         if ($move->getDescription()) {
+            $descriptionMaxLength = $move->getPower() >= 100 ? 50 : 54;
             $description = trim(preg_replace('/\s+/', ' ', $move->getDescription()));
-            $align = strlen($description) <= 60 ? 'center' : 'left';
-            $x = strlen($description) <= 60 ? 133 : 0;
-            $description = strlen($description) > 60 ? substr($description, 0, 47).'...' : $description;
+            $description = strlen($description) > $descriptionMaxLength ? trim(substr($description, 0, $descriptionMaxLength - 3)).'...' : $description;
 
-            $moveNameCanvas->text($description, $x, 38, function (Font $font) use ($fontColor, $align) {
+            $moveNameCanvas->text($description, 133, 38, function (Font $font) use ($fontColor) {
                 $font->file(self::fontRegular());
                 $font->size(12);
                 $font->color($fontColor);
-                $font->align($align);
+                $font->align('center');
             });
         }
         $moveCanvas->insert($moveNameCanvas, 'left', 70);
-
-        $damageCanvas = $this->imageManager->canvas(40, 30);
-        $damageCanvas->text($move->getPower(), 40, 24, function (Font $font) use ($fontColor) {
-            $font->file(self::fontRegular());
-            $font->size(24);
-            $font->color($fontColor);
-            $font->align('right');
-        });
-        $moveCanvas->insert($damageCanvas, 'right');
 
         return $moveCanvas;
     }
