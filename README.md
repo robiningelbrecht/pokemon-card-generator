@@ -111,6 +111,8 @@ There's an example gallery available on https://pokemon-card-generator.robininge
 Be sure to also check https://gotta-generate-em-all.robiningelbrecht.be/. 
 It generates and publishes a new card every day 🥳
 
+<img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gotta-generate-em-all.jpeg" alt="Gotta generate 'em all">
+
 ## Acknowledgements
 
 Thanks to [TheDuckTamerBlanks](https://www.deviantart.com/katarawaterbender) for the blank card templates.
