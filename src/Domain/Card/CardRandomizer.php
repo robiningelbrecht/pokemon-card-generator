@@ -9,9 +9,10 @@ class CardRandomizer
 {
     public function randomizeHpByRarity(PokemonRarity $pokemonRarity): int
     {
-        $basePoints = 4;
+        [$min, $max] = $pokemonRarity->getLevelRange();
+        $range = range($min, $max, 10);
 
-        return 10 * ($basePoints + $pokemonRarity->getBonus()) + (mt_rand(0, (int) floor($basePoints + $pokemonRarity->getBonus() / 2)) * 2);
+        return $range[array_rand($range)];
     }
 
     public function randomizeHeightBySize(PokemonSize $size): string

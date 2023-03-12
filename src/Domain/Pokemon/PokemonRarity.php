@@ -17,12 +17,12 @@ enum PokemonRarity: string
         };
     }
 
-    public function getBonus(): int
+    public function getLevelRange(): array
     {
         return match ($this) {
-            self::COMMON => 1,
-            self::UNCOMMON => 2,
-            self::RARE => 3,
+            self::COMMON => [30, 50],
+            self::UNCOMMON => [60, 90],
+            self::RARE => [80, 120],
         };
     }
 
