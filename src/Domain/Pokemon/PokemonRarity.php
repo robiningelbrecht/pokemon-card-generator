@@ -21,8 +21,8 @@ enum PokemonRarity: string
     {
         return match ($this) {
             self::COMMON => [30, 50],
-            self::UNCOMMON => [60, 90],
-            self::RARE => [80, 120],
+            self::UNCOMMON => [60, 100],
+            self::RARE => [90, 150],
         };
     }
 
