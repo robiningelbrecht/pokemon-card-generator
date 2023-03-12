@@ -26,12 +26,12 @@ enum PokemonRarity: string
         };
     }
 
-    public function getMinAllowedPpForMove(): int
+    public function getAllowedDamageRangeForMove(): array
     {
         return match ($this) {
-            self::COMMON => 25,
-            self::UNCOMMON => 15,
-            self::RARE => -1,
+            self::COMMON => [1, 50],
+            self::UNCOMMON => [50, 90],
+            self::RARE => [90, 1000],
         };
     }
 

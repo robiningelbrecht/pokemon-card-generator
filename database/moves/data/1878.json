@@ -1,0 +1,1 @@
+{"name":"Iron Smash","cost":["steel","steel","normal","normal"],"convertedEnergyCost":4,"damage":50,"text":"Flip 2 coins. If both are heads, this attack does 50 damage plus 20 more damage. If both are tails, this attack does nothing. If 1 is heads and 1 is tails, this attack just does 50 damage.","type":"steel","id":1878}

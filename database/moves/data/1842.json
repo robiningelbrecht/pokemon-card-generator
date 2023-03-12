@@ -1,0 +1,1 @@
+{"name":"Spiral Wave","cost":["electric","water"],"convertedEnergyCost":2,"damage":20,"text":"Flip a coin until you get tails. This attack does 20 damage times the number of heads.","type":"electric","id":1842}
