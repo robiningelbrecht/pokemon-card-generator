@@ -13,14 +13,14 @@ class PokemonMoveRepository
     ) {
     }
 
-    public function findByTypeAndRarity(PokemonType $type, PokemonRarity $rarity = null): array
+    public function findByTypeAndRarity(PokemonType $type, PokemonRarity $rarity): array
     {
         return array_map(
             fn (array $data) => PokemonMove::fromMap($data),
             $this->store->findBy([
                 ['type', '==', $type->getElement()->value],
                 [
-                    ['damage', 'BETWEEN', $rarity ? $rarity->getAllowedDamageRangeForMove() : [0, 10000]],
+                    ['damage', 'BETWEEN', $rarity->getAllowedDamageRangeForMove()],
                     'OR',
                     ['damage', '=', 0],
                 ],

@@ -42,11 +42,14 @@ class GenerateCardCommandHandler implements CommandHandler
         $normalType = $this->pokemonTypeRepository->findOneByCardType(CardType::NORMAL);
         $moves = $this->pokemonMoveRepository->findByTypeAndRarity($type, $command->getPokemonRarity());
 
-        $firstMove = $moves[array_rand($moves)];
+        do {
+            $firstMove = $moves[array_rand($moves)];
+        } while (0 === $firstMove->getPower());
+
         $selectedMoves = [$firstMove];
         $numberOfMoves = mt_rand(1, 2);
         if (2 === $numberOfMoves) {
-            $moves = $this->pokemonMoveRepository->findByTypeAndRarity(mt_rand(0, 1) ? $normalType : $type);
+            $moves = $this->pokemonMoveRepository->findByTypeAndRarity(mt_rand(0, 1) ? $normalType : $type, $command->getPokemonRarity());
             do {
                 $secondMove = $moves[array_rand($moves)];
             } while ($firstMove->getName() === $secondMove->getName() || 0 === $firstMove->getPower() + $secondMove->getPower());
