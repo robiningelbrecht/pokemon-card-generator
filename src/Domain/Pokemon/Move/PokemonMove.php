@@ -31,7 +31,8 @@ class PokemonMove
      */
     public function getCost(): array
     {
-        return array_map(fn (string $cost) => PokemonElement::from($cost), $this->data['cost']);
+        // We only support a cost of 4.
+        return array_slice(array_map(fn (string $cost) => PokemonElement::from($cost), $this->data['cost']), 0, 4);
     }
 
     public function getPower(): int
