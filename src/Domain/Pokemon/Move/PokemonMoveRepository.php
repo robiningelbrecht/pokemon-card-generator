@@ -18,6 +18,7 @@ class PokemonMoveRepository
         return array_map(
             fn (array $data) => PokemonMove::fromMap($data),
             $this->store->findBy([
+                ['convertedEnergyCost', '<=', 4],
                 ['type', '==', $type->getElement()->value],
                 [
                     ['damage', 'BETWEEN', $rarity->getAllowedDamageRangeForMove()],

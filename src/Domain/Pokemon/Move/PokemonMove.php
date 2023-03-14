@@ -32,6 +32,7 @@ class PokemonMove
     public function getCost(): array
     {
         // We only support a cost of 4.
+        // Should be covered by repository already... but hey, you never know...
         return array_slice(array_map(fn (string $cost) => PokemonElement::from($cost), $this->data['cost']), 0, 4);
     }
 

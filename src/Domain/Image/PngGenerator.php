@@ -167,7 +167,7 @@ class PngGenerator implements ImageGenerator
         });
 
         if ($move->getDescription()) {
-            $descriptionMaxLength = 50;
+            $descriptionMaxLength = 48;
             $description = trim(preg_replace('/\s+/', ' ', $move->getDescription()));
             $description = strlen($description) > $descriptionMaxLength ? trim(substr($description, 0, $descriptionMaxLength - 3)).'...' : $description;
 
