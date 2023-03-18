@@ -68,14 +68,14 @@ class GenerateCardCommandHandler implements CommandHandler
             $promptForPokemonName = $promptGenerator->forPokemonName();
             $name = Name::fromString(ucfirst(strtolower(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'))));
 
-            $promptForPokemonDescription = $promptGenerator->forPokemonDescription($selectedMoves);
+            $promptForPokemonDescription = $promptGenerator->forPokemonDescription($name, $selectedMoves);
             $description = Description::fromString($this->openAI->createCompletion($promptForPokemonDescription));
         }
         if (GptVersion::FOUR === $command->getGptVersion()) {
             $promptForPokemonName = $promptGenerator->forPokemonName();
             $name = Name::fromString(ucfirst(strtolower($this->openAI->createChatCompletion($promptForPokemonName))));
 
-            $promptForPokemonDescription = $promptGenerator->forPokemonDescription($selectedMoves);
+            $promptForPokemonDescription = $promptGenerator->forPokemonDescription($name, $selectedMoves);
             $description = Description::fromString($this->openAI->createChatCompletion($promptForPokemonDescription));
         }
 

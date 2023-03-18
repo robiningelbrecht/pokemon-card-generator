@@ -30,7 +30,7 @@ class OpenAI
         $response = $this->client->chat()->create([
             'model' => 'gpt-4',
             'messages' => [
-                ['role' => 'system', 'content' => (string) $prompt],
+                ['role' => 'user', 'content' => (string) $prompt],
             ],
             'n' => 1,
             'max_tokens' => 256,

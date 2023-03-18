@@ -39,16 +39,18 @@ class PromptGenerator
     }
 
     public function forPokemonDescription(
+        Name $pokemonName,
         array $moves,
     ): Prompt {
         $prompt = [
             sprintf(
-                'Generate a short, original, creative Pokedex description for a %s pokemon. It can be found in %s-like environments',
+                'Generate a short, original, creative Pokedex description for %s, a %s pokemon. It can be found in %s-like environments',
+                $pokemonName,
                 implode(' ', $this->buildSubjectDescription()),
                 $this->environment
             ),
             sprintf('It has the following abilities: %s. Be creative about its day-to-day life.', implode(', ', array_map(fn (PokemonMove $move) => $move->getName(), $moves))),
-            sprintf('Do not use the word %s or %s. Use a maximum of 150 characters. Only answer with the generated description.', $this->subject, $this->cardType->value),
+            sprintf('Do not use the words "%s", "%s" or "%s". Use a maximum of 150 characters. Only answer with the generated description.', $this->subject, $this->cardType->value, $pokemonName),
         ];
 
         return Prompt::fromString(implode(' ', $prompt));
