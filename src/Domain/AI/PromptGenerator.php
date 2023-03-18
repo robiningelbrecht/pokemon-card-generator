@@ -19,19 +19,19 @@ class PromptGenerator
         private readonly Name $subject,
         private readonly string $sizeAdjective,
         private readonly string $rarityAdjective,
-        private readonly Description $detail,
         private readonly Environment $environment,
         private readonly string $ambience,
+        private readonly ?Description $detail = null,
     ) {
     }
 
     public function forPokemonName(): Prompt
     {
         return Prompt::fromString(sprintf(
-            'Generate a unique, original, creative, %s pokemon name for %s %s. It can be found in %s-like environments. Do not use the words pokemon, %s or %s. Ony answer with the generated name',
+            'Generate a unique, original, creative, %s name for %s pokemon %s. It can be found in %s-like environments. Do not use the words pokemon, %s or %s. Ony answer with the generated name',
             PokemonRarity::UNCOMMON === $this->pokemonRarity ? 'short, single-word' : 'single-word',
             implode(' ', $this->buildSubjectDescription()),
-            $this->detail,
+            $this->detail ?? '',
             $this->environment,
             $this->cardType->value,
             $this->subject
@@ -103,9 +103,9 @@ class PromptGenerator
             $creature->getName(),
             $sizeAdjectives[array_rand($sizeAdjectives)],
             $rarityAdjectives[array_rand($rarityAdjectives)],
-            $creature->getRandomDescriptionForCardType($cardType),
             $environments[array_rand($environments)],
             $ambience[array_rand($ambience)],
+            $creature->getRandomDescriptionForCardType($cardType),
         );
     }
 }

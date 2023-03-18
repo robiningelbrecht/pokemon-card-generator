@@ -19,15 +19,19 @@ class Creature
         return $this->name;
     }
 
-    public function getRandomDescriptionForCardType(CardType $cardType): Description
+    public function getRandomDescriptionForCardType(CardType $cardType): ?Description
     {
-        /** @var \App\Domain\Card\Creature\CreatureAttribute $randomAttribute */
-        $randomAttribute = $this->creatureAttributes[array_rand($this->creatureAttributes)];
-        $adjectives = $cardType->getAdjectives();
+        if ($this->creatureAttributes) {
+            /** @var \App\Domain\Card\Creature\CreatureAttribute $randomAttribute */
+            $randomAttribute = $this->creatureAttributes[array_rand($this->creatureAttributes)];
+            $adjectives = $cardType->getAdjectives();
 
-        $randomAttribute->withAdjective($adjectives[array_rand($adjectives)]);
+            $randomAttribute->withAdjective($adjectives[array_rand($adjectives)]);
 
-        return Description::fromString($randomAttribute);
+            return Description::fromString($randomAttribute);
+        }
+
+        return null;
     }
 
     public static function fromNameAndAttributes(
