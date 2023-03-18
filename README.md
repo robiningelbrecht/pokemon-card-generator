@@ -96,6 +96,7 @@ by navigating to the card gallery page: `http://localhost:8080/`.
 -e, --evolutionSeries Indicates if you want to generate a series that evolve from one another. Options "size", "rarity" and "numberOfCards" will be ignored
 -x, --numberOfCards   The number of cards to generate. A number between 1 and 10 [default: 1]
 -f, --fileType        The image file type you want to use. Valid options are svg, png [default: "png"]
+-g, --gptVersion      GPT version to use. Valid options are 3, 4 [default: 4]
 -h, --help            Display help for the given command. When no command is given display help for the list command
 ```
 

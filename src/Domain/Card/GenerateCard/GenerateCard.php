@@ -2,6 +2,7 @@
 
 namespace App\Domain\Card\GenerateCard;
 
+use App\Domain\AI\GptVersion;
 use App\Domain\Card\CardId;
 use App\Domain\Card\CardType;
 use App\Domain\Card\Creature\Creature;
@@ -19,6 +20,7 @@ class GenerateCard extends DomainCommand
         private readonly PokemonSize $pokemonSize,
         private readonly Creature $creature,
         private readonly FileType $fileType,
+        private readonly GptVersion $gptVersion,
     ) {
     }
 
@@ -50,5 +52,10 @@ class GenerateCard extends DomainCommand
     public function getFileType(): FileType
     {
         return $this->fileType;
+    }
+
+    public function getGptVersion(): GptVersion
+    {
+        return $this->gptVersion;
     }
 }

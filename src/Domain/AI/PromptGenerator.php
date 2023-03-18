@@ -28,7 +28,7 @@ class PromptGenerator
     public function forPokemonName(): Prompt
     {
         return Prompt::fromString(sprintf(
-            'Generate a unique, original, creative, %s pokemon name for %s %s. It can be found in %s-like environments. Do not use the words pokemon, %s or %s. Ony answer with the generated name:',
+            'Generate a unique, original, creative, %s pokemon name for %s %s. It can be found in %s-like environments. Do not use the words pokemon, %s or %s. Ony answer with the generated name',
             PokemonRarity::UNCOMMON === $this->pokemonRarity ? 'short, single-word' : 'single-word',
             implode(' ', $this->buildSubjectDescription()),
             $this->detail,
@@ -39,18 +39,16 @@ class PromptGenerator
     }
 
     public function forPokemonDescription(
-        Name $pokemonName,
         array $moves,
     ): Prompt {
         $prompt = [
             sprintf(
-                'Generate a short, original, creative Pokedex description for %s, %s pokemon. It can be found in %s-like environments',
-                $pokemonName,
+                'Generate a short, original, creative Pokedex description for a %s pokemon. It can be found in %s-like environments',
                 implode(' ', $this->buildSubjectDescription()),
                 $this->environment
             ),
             sprintf('It has the following abilities: %s. Be creative about its day-to-day life.', implode(', ', array_map(fn (PokemonMove $move) => $move->getName(), $moves))),
-            sprintf('Do not use the word %s or %s or the ability names. Use a maximum of 50 characters:', $this->subject, $this->cardType->value),
+            sprintf('Do not use the word %s or %s. Use a maximum of 150 characters. Only answer with the generated description.', $this->subject, $this->cardType->value),
         ];
 
         return Prompt::fromString(implode(' ', $prompt));

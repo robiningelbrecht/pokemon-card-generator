@@ -2,6 +2,7 @@
 
 namespace App\Domain\Card\GenerateCard;
 
+use App\Domain\AI\GptVersion;
 use App\Domain\AI\OpenAI;
 use App\Domain\AI\PromptGenerator;
 use App\Domain\AI\Replicate;
@@ -63,11 +64,20 @@ class GenerateCardCommandHandler implements CommandHandler
             $command->getCreature(),
         );
 
-        $promptForPokemonName = $promptGenerator->forPokemonName();
-        $name = Name::fromString(ucfirst(strtolower(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'))));
+        if (GptVersion::THREE === $command->getGptVersion()) {
+            $promptForPokemonName = $promptGenerator->forPokemonName();
+            $name = Name::fromString(ucfirst(strtolower(rtrim($this->openAI->createCompletion($promptForPokemonName), '.'))));
 
-        $promptForPokemonDescription = $promptGenerator->forPokemonDescription($name, $selectedMoves);
-        $description = Description::fromStringWithMaxChars($this->openAI->createCompletion($promptForPokemonDescription), 145);
+            $promptForPokemonDescription = $promptGenerator->forPokemonDescription($selectedMoves);
+            $description = Description::fromString($this->openAI->createCompletion($promptForPokemonDescription));
+        }
+        if (GptVersion::FOUR === $command->getGptVersion()) {
+            $promptForPokemonName = $promptGenerator->forPokemonName();
+            $name = Name::fromString(ucfirst(strtolower($this->openAI->createChatCompletion($promptForPokemonName))));
+
+            $promptForPokemonDescription = $promptGenerator->forPokemonDescription($selectedMoves);
+            $description = Description::fromString($this->openAI->createChatCompletion($promptForPokemonDescription));
+        }
 
         $promptForPokemonVisual = $promptGenerator->forPokemonVisual();
         $prediction = $this->replicate->predict($promptGenerator->forPokemonVisual());

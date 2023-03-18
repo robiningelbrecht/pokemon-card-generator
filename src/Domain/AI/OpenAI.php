@@ -23,4 +23,19 @@ class OpenAI
 
         return trim($response->toArray()['choices'][0]['text']);
     }
+
+    public function createChatCompletion(
+        Prompt $prompt,
+    ): string {
+        $response = $this->client->chat()->create([
+            'model' => 'gpt-4',
+            'messages' => [
+                ['role' => 'system', 'content' => (string) $prompt],
+            ],
+            'n' => 1,
+            'max_tokens' => 256,
+        ]);
+
+        return trim($response->toArray()['choices'][0]['message']['content']);
+    }
 }

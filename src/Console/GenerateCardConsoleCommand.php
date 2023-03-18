@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Domain\AI\GptVersion;
 use App\Domain\Card\CardId;
 use App\Domain\Card\CardRepository;
 use App\Domain\Card\CardType;
@@ -44,7 +45,8 @@ class GenerateCardConsoleCommand extends Command
             ->addOption('creature', 'c', InputOption::VALUE_OPTIONAL, 'The creature the Pokémon needs to look like (e.g. monkey, dragon, etc.). Omit to to use a random one')
             ->addOption('evolutionSeries', 'e', InputOption::VALUE_NONE, 'Indicates if you want to generate a series that evolve from one another. Options "size", "rarity" and "numberOfCards" will be ignored')
             ->addOption('numberOfCards', 'x', InputOption::VALUE_OPTIONAL, 'The number of cards to generate. A number between 1 and 10', 1)
-            ->addOption('fileType', 'f', InputOption::VALUE_OPTIONAL, 'The image file type you want to use. Valid options are '.implode(', ', array_map(fn (FileType $fileType) => $fileType->value, FileType::cases())), FileType::PNG->value);
+            ->addOption('fileType', 'f', InputOption::VALUE_OPTIONAL, 'The image file type you want to use. Valid options are '.implode(', ', array_map(fn (FileType $fileType) => $fileType->value, FileType::cases())), FileType::PNG->value)
+            ->addOption('gptVersion', 'g', InputOption::VALUE_OPTIONAL, 'GPT version to use. Valid options are '.implode(', ', array_map(fn (GptVersion $gptVersion) => $gptVersion->value, GptVersion::cases())), GptVersion::FOUR->value);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -54,6 +56,7 @@ class GenerateCardConsoleCommand extends Command
             $rarities = PokemonRarity::cases();
             $sizes = PokemonSize::cases();
             $fileType = FileType::from($input->getOption('fileType'));
+            $gptVersion = GptVersion::from((int) $input->getOption('gptVersion'));
             $generateEvolutionSeries = $input->getOption('evolutionSeries');
             $numberOfCardsToGenerate = $generateEvolutionSeries ? (mt_rand(0, 100) < 75 ? 3 : 2) : $input->getOption('numberOfCards');
 
@@ -99,6 +102,7 @@ class GenerateCardConsoleCommand extends Command
                         ['Pokémon size', strtoupper($size->value)],
                         ['Creature', ucfirst($creature->getName())],
                         ['File type', $fileType->value],
+                        ['GPT version', $gptVersion->value],
                     ])
                     ->render();
 
@@ -110,6 +114,7 @@ class GenerateCardConsoleCommand extends Command
                     $size,
                     $creature,
                     $fileType,
+                    $gptVersion,
                 ));
 
                 $card = $this->cardRepository->find($cardId);
