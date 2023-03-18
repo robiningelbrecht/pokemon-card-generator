@@ -20,15 +20,15 @@ although I came up with a slightly different approach.
 ### Comparison
 
 |                                                |     This repo    | Jack's repo |
-|------------------------------------------------|:----------------:|:-----------:|
-| AI to generate name and description            |      OpenAI      |    OpenAI   |
-| AI to generate visual                          | Stable Difussion |  Midjourney |
-| Generate multiple cards at once                |         ✅        |      ✅      |
-| Generate cards of a specific element           |         ✅        |      ✅      |
-| Generate cards of a specific creature          |         ✅        |      ✅      |
-| Generate a series that evolve from one another |         ✅        |      ✅      |
-| Fully generate a card with one command         |         ✅        |      ❌      |
-| Gallery with overview of generated cards       |         ✅        |      ❌      |
+|------------------------------------------------|:-------------------:|:-------------:|
+| AI to generate name and description            | OpenAI - GPT3, GPT4 | OpenAI - GPT3 |
+| AI to generate visual                          | Stable Difussion    |  Midjourney   |
+| Generate multiple cards at once                |         ✅          |      ✅        |
+| Generate cards of a specific element           |         ✅          |      ✅        |
+| Generate cards of a specific creature          |         ✅          |      ✅        |
+| Generate a series that evolve from one another |         ✅          |      ✅        |
+| Fully generate a card with one command         |         ✅          |      ❌        |
+| Gallery with overview of generated cards       |         ✅          |      ❌        |
 
 ## Installation
 
