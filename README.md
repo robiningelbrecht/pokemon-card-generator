@@ -111,7 +111,7 @@ There's an example gallery available on https://pokemon-card-generator.robininge
 ## Gotta generate 'em all
 
 Be sure to also check https://gotta-generate-em-all.com. 
-It generates and publishes a new card every day 🥳
+It generates and publishes a new card every day 🥳. Cards are also publised to https://www.reddit.com/r/GottaGenerateEmAll/
 
 <img src="https://github.com/robiningelbrecht/pokemon-card-generator/raw/master/readme/gotta-generate-em-all.jpeg" alt="Gotta generate 'em all">
 
